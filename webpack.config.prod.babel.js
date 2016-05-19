@@ -42,18 +42,18 @@ module.exports = {
 		})
 	],
 	plugins: [
-		new ExtractTextPlugin("app.css"),
-		new webpack.DefinePlugin({
-			"process.env": {
-				NODE_ENV: "production"
-			}
-		}),
-		new webpack.optimize.UglifyJsPlugin({
-			compress: {
-				warnings: false
-			}
-		}),
-		new webpack.optimize.OccurrenceOrderPlugin()
+		new ExtractTextPlugin("app.css")
+		// new webpack.DefinePlugin({
+		// 	"process.env": {
+		// 		NODE_ENV: "production"
+		// 	}
+		// }),
+		// new webpack.optimize.UglifyJsPlugin({
+		// 	compress: {
+		// 		warnings: false
+		// 	}
+		// }),
+		// new webpack.optimize.OccurrenceOrderPlugin()
 	],
 	// externals: {
 	// 	vue: "Vue"
