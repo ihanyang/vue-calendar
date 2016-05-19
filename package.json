@@ -13,7 +13,9 @@
     "url": "git+https://github.com/ihanyang/vue-calendar.git"
   },
   "keywords": [
-    "vue"
+    "vue",
+    "date-picker",
+    "calendar"
   ],
   "author": "ihanyang",
   "license": "MIT",
