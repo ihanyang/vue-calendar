@@ -10516,6 +10516,7 @@
 					lastDay += 7;
 				}
 	
+				console.dir(result);
 				return result;
 			}
 		},
@@ -10529,7 +10530,7 @@
 				this.date = new Date(this.date.setMonth(this.date.getMonth() + 1));
 			},
 			selectDate: function selectDate(value) {
-				if (!value.day) {
+				if (!value.day || value.day === 32) {
 					return;
 				}
 	
