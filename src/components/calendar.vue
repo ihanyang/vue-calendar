@@ -3,7 +3,7 @@
 		<div class="calendar-mask" @click="show = false"></div>
 		<div class="calendar-container" :style="{top: top}">
 			<date-header :date-text="dateText" :turn-type="turnType" :status.sync="status"></date-header>
-			<pick-month :date.sync="date" :aa.sync="aa" v-if="status"></pick-month>
+			<pick-month :date-text.sync="dateText" v-if="status"></pick-month>
 			<date-list :date-text="dateText" v-if="! status"></date-list>
 			<date-footer :show.sync="show" :date="date"></date-footer>
 		</div>
@@ -52,8 +52,8 @@
 				return this.dateText.slice(-2)
 			}
 		},
-		events: {
-			select() {
+		watch: {
+			dateText() {
 				this.$nextTick(() => {
 					let currentDay = + this.dateText.slice(-2)
 					let date = this.date

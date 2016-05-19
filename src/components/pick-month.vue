@@ -26,9 +26,10 @@
 
 <script>
 	export default {
-		props: ["date"],
+		props: ["dateText"],
 		data() {
 			return {
+				date: new Date(this.dateText),
 				day: new Date().getDate(),
 				weeks: ["S", "M", "T", "W", "T", "F", "S"],
 				months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
@@ -109,9 +110,17 @@
 				this.date = new Date(this.date.setMonth(this.date.getMonth() + 1))
 			},
 			selectDate(value) {
-				this.$dispatch("select")
-
 				this.date = new Date(this.date.setDate(value.day))
+
+				let date = this.date
+				let year = date.getFullYear()
+				let month = date.getMonth() + 1
+				let day = date.getDate()
+
+				let str = `${year}/${month}/${day}`
+
+				this.dateText = str.replace(/\b(\w)\b/g, "0$1")
+
 				this.bb = value.day
 			}
 		},
