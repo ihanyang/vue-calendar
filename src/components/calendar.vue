@@ -4,7 +4,7 @@
 		<div class="calendar-container" :style="{top: top}">
 			<date-header :date-text="dateText" :turn-type="turnType" :status.sync="status"></date-header>
 			<pick-month :date-text.sync="dateText" v-if="status"></pick-month>
-			<date-list :date-text="dateText" v-if="! status"></date-list>
+			<date-list :date-text.sync="dateText" v-if="! status"></date-list>
 			<date-footer :show.sync="show" :date="date"></date-footer>
 		</div>
 	</div>
