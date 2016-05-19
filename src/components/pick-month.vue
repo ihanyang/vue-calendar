@@ -110,6 +110,10 @@
 				this.date = new Date(this.date.setMonth(this.date.getMonth() + 1))
 			},
 			selectDate(value) {
+				if (! value.day) {
+					return
+				}
+				
 				this.date = new Date(this.date.setDate(value.day))
 
 				let date = this.date
