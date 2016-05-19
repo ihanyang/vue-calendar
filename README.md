@@ -1,6 +1,6 @@
 # vue-calendar
 
-> date-picker component for Vue.js [demo](http://sw2016.h5.88h5.cn/profile)
+> date-picker component for Vue.js [demo](http://ihanyang.github.io/demo/vue-calendar/)
 
 # Usage
 ```vue
