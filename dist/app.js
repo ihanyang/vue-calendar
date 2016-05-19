@@ -10167,6 +10167,15 @@
 		components: {
 			calendar: _calendar2.default
 		},
+		watch: {
+			show: function show(value) {
+				if (value) {
+					this.$els.input.disabled = true;
+				} else {
+					this.$els.input.disabled = false;
+				}
+			}
+		},
 		methods: {
 			createDateText: function createDateText() {
 				var date = new Date();
@@ -10631,7 +10640,7 @@
 /* 30 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div>\n\t<input type=\"text\" class=\"input\" v-model=\"dateText\" @focus=\"show = true\">\n\t<calendar :show.sync=\"show\" :date-text.sync=\"dateText\" v-if=\"show\"></calendar>\n</div>\n";
+	module.exports = "\n<div>\n\t<input type=\"text\" class=\"input\" v-model=\"dateText\" @focus=\"show = true\" v-el:input>\n\t<calendar :show.sync=\"show\" :date-text.sync=\"dateText\" v-if=\"show\"></calendar>\n</div>\n";
 
 /***/ }
 /******/ ]);
