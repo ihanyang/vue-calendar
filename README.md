@@ -11,7 +11,7 @@
 
 # Screenshots
 
-![screenshot](https://github.com/ihanyang/vue-calendar/blob/master/screenshot-1.gif)
+![screenshot](https://github.com/ihanyang/vue-calendar/blob/master/screenshot.gif)
 
 # Liceense
 [The MIT License](http://opensource.org/licenses/MIT)
