@@ -10529,6 +10529,10 @@
 				this.date = new Date(this.date.setMonth(this.date.getMonth() + 1));
 			},
 			selectDate: function selectDate(value) {
+				if (!value.day) {
+					return;
+				}
+	
 				this.date = new Date(this.date.setDate(value.day));
 	
 				var date = this.date;
