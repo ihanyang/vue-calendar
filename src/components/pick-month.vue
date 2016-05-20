@@ -44,9 +44,12 @@
 			},
 			calendar() {
 				let result = []
-				let calendar = new Array(42)
-				let first = new Date(this.date.getFullYear(), this.date.getMonth(), 1).getDay()
-				let days = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0).getDate()
+				let calendar = []
+				let date = this.date
+				let year = this.year
+				let month = this.month
+				let first = new Date(date.getFullYear(), date.getMonth(), 1).getDay()
+				let days = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()
 
 				for (let i = 0; i < days; i++, first++) {
 					calendar[first] = i + 1
@@ -64,14 +67,14 @@
 				for (let i = 0; i < 7 - currentDay; i++, first++) {
 					result[0][first] = {
 						day: i + 1,
-						date: new Date(`${this.year}/${this.month}/${i + 1}`)
+						date: new Date(`${year}/${month}/${i + 1}`)
 					}
 				}
 
 				while(currentDay > -1) {
 					result[0][currentDay - 1] = {
 						day: 32,
-						date: new Date(`${this.year}/${this.month}/32`)
+						date: new Date(`${year}/${month}/32`)
 					}
 					currentDay--
 				}
@@ -80,12 +83,12 @@
 				let lastDay = result[0].slice(-1)[0].day
 
 				for (let i = 1; i <= count; i++) {
-					result[i] = new Array(7)
+					result[i] = []
 
 					for (let ii = 0; ii < 7; ii++) {
 						result[i][ii] = {
 							day: calendar[lastDay + ii],
-							date: new Date(`${this.year}/${this.month}/${calendar[lastDay + ii]}`)
+							date: new Date(`${year}/${month}/${calendar[lastDay + ii]}`)
 						}
 					}
 
