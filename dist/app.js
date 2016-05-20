@@ -11177,9 +11177,12 @@
 			},
 			calendar: function calendar() {
 				var result = [];
-				var calendar = new Array(42);
-				var first = new Date(this.date.getFullYear(), this.date.getMonth(), 1).getDay();
-				var days = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0).getDate();
+				var calendar = [];
+				var date = this.date;
+				var year = this.year;
+				var month = this.month;
+				var first = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+				var days = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
 	
 				for (var i = 0; i < days; i++, first++) {
 					calendar[first] = i + 1;
@@ -11198,14 +11201,14 @@
 				for (var _i = 0; _i < 7 - currentDay; _i++, first++) {
 					result[0][first] = {
 						day: _i + 1,
-						date: new Date(this.year + "/" + this.month + "/" + (_i + 1))
+						date: new Date(year + "/" + month + "/" + (_i + 1))
 					};
 				}
 	
 				while (currentDay > -1) {
 					result[0][currentDay - 1] = {
 						day: 32,
-						date: new Date(this.year + "/" + this.month + "/32")
+						date: new Date(year + "/" + month + "/32")
 					};
 					currentDay--;
 				}
@@ -11214,12 +11217,12 @@
 				var lastDay = result[0].slice(-1)[0].day;
 	
 				for (var _i2 = 1; _i2 <= count; _i2++) {
-					result[_i2] = new Array(7);
+					result[_i2] = [];
 	
 					for (var ii = 0; ii < 7; ii++) {
 						result[_i2][ii] = {
 							day: calendar[lastDay + ii],
-							date: new Date(this.year + "/" + this.month + "/" + calendar[lastDay + ii])
+							date: new Date(year + "/" + month + "/" + calendar[lastDay + ii])
 						};
 					}
 	
