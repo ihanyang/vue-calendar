@@ -16,11 +16,10 @@
 			</thead>
 			<tbody>
 				<tr v-for="week in calendar">
-					<td :class="{today: day.date.toDateString() === new Date().toDateString(), selected: day.day === this.bb, not: ! day.day || day.day === 32}" v-for="day in week" track-by="$index" v-text="day.day === 32 ? '' : day.day" @click="selectDate(day)"></td>
+					<td :class="{today: day.date.toDateString() === new Date().toDateString(), selected: day.day === this.currentDay, not: ! day.day || day.day === 32}" v-for="day in week" track-by="$index" v-text="day.day === 32 ? '' : day.day" @click="selectDate(day)"></td>
 				</tr>
 			</tbody>
 		</table>
-		<!-- <div class="select-date"></div> -->
 	</div>
 </template>
 
@@ -33,7 +32,7 @@
 				day: new Date().getDate(),
 				weeks: ["S", "M", "T", "W", "T", "F", "S"],
 				months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-				bb: ""
+				currentDay: ""
 			}
 		},
 		computed: {
@@ -84,8 +83,6 @@
 					result[i] = new Array(7)
 
 					for (let ii = 0; ii < 7; ii++) {
-						//let lastDay = result[ii].slice(-1)[0]
-
 						result[i][ii] = {
 							day: calendar[lastDay + ii],
 							date: new Date(`${this.year}/${this.month}/${calendar[lastDay + ii]}`)
@@ -95,18 +92,18 @@
 					lastDay += 7
 				}
 
-				console.dir(result)
+				//console.dir(result)
 				return result
 
 			}
 		},
 		methods: {
 			prevMonth() {
-				this.bb = ""
+				this.currentDay = ""
 				this.date = new Date(this.date.setMonth(this.date.getMonth() - 1))
 			},
 			nextMonth() {
-				this.bb = ""
+				this.currentDay = ""
 				this.date = new Date(this.date.setMonth(this.date.getMonth() + 1))
 			},
 			selectDate(value) {
@@ -125,11 +122,11 @@
 
 				this.dateText = str.replace(/\b(\w)\b/g, "0$1")
 
-				this.bb = value.day
+				this.currentDay = value.day
 			}
 		},
 		ready() {
-			this.bb = this.date.getDate()
+			this.currentDay = this.date.getDate()
 		}
 	}
 </script>

@@ -1,10 +1,9 @@
 import path from "path"
 import precss from "precss"
 import autoprefixer from "autoprefixer"
-import ExtractTextPlugin from "extract-text-webpack-plugin"
 
 module.exports = {
-	entry: "./src/app.js",
+	entry: "./demo/app.js",
 	output: {
 		path: path.resolve(__dirname, "./dist"),
 		filename: "app.js",
@@ -23,17 +22,14 @@ module.exports = {
 			},
 			{
 				test: /\.css$/,
-				loader: ExtractTextPlugin.extract("style-loader", "css!postcss")
-			},
-			{
-				test: /\.(png|jpg|gif|ttf|svg|ico)$/,
-				loader: "url-loader",
-				query: {
-					name: "[hash].[ext]",
-					limit: 10000,
-				}
+				loader: "style!css"
 			}
 		]
+	},
+	vue: {
+		postcss: [precss, autoprefixer({
+			browsers: "last 2 versions"
+		})]
 	},
 	postcss: [
 		precss,
@@ -41,17 +37,5 @@ module.exports = {
 			browsers: "last 2 versions"
 		})
 	],
-	plugins: [
-		new ExtractTextPlugin("app.css")
-	],
-	// externals: {
-	// 	vue: "Vue"
-	// },
-	devServer: {
-		historyApiFallback: true,
-		hot: true,
-		inline: true,
-		progress: true,
-	},
-	devtool: "eval-source-map"
+	devtool: "source-map"
 }

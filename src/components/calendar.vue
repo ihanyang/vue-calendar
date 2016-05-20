@@ -1,3 +1,5 @@
+<style src="../css/calendar.css"></style>
+
 <template>
 	<div class="calendar-wrapper" transition="calendar">
 		<div class="calendar-mask" @click="show = false"></div>
