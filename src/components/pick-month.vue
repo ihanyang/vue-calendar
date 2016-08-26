@@ -79,6 +79,8 @@
 					currentDay--
 				}
 
+				first = new Date(date.getFullYear(), date.getMonth(), 1).getDay()
+
 				let count = Math.ceil((days - (7 - first)) / 7)
 				let lastDay = result[0].slice(-1)[0].day
 

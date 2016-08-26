@@ -101,7 +101,7 @@
 	
 	
 	// module
-	exports.push([module.id, "/*! normalize.css v3.0.2 | MIT License | git.io/normalize */\r\n\r\n/**\r\n * 1. Set default font family to sans-serif.\r\n * 2. Prevent iOS text size adjust after orientation change, without disabling\r\n *    user zoom.\r\n */\r\n\r\nhtml {\r\n  font-family: sans-serif; /* 1 */\r\n  -ms-text-size-adjust: 100%; /* 2 */\r\n  -webkit-text-size-adjust: 100%; /* 2 */\r\n}\r\n\r\n/**\r\n * Remove default margin.\r\n */\r\n\r\nbody {\r\n  margin: 0;\r\n}\r\n\r\n/* HTML5 display definitions\r\n   ========================================================================== */\r\n\r\n/**\r\n * Correct `block` display not defined for any HTML5 element in IE 8/9.\r\n * Correct `block` display not defined for `details` or `summary` in IE 10/11\r\n * and Firefox.\r\n * Correct `block` display not defined for `main` in IE 11.\r\n */\r\n\r\narticle,\r\naside,\r\ndetails,\r\nfigcaption,\r\nfigure,\r\nfooter,\r\nheader,\r\nhgroup,\r\nmain,\r\nmenu,\r\nnav,\r\nsection,\r\nsummary {\r\n  display: block;\r\n}\r\n\r\n/**\r\n * 1. Correct `inline-block` display not defined in IE 8/9.\r\n * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.\r\n */\r\n\r\naudio,\r\ncanvas,\r\nprogress,\r\nvideo {\r\n  display: inline-block; /* 1 */\r\n  vertical-align: baseline; /* 2 */\r\n}\r\n\r\n/**\r\n * Prevent modern browsers from displaying `audio` without controls.\r\n * Remove excess height in iOS 5 devices.\r\n */\r\n\r\naudio:not([controls]) {\r\n  display: none;\r\n  height: 0;\r\n}\r\n\r\n/**\r\n * Address `[hidden]` styling not present in IE 8/9/10.\r\n * Hide the `template` element in IE 8/9/11, Safari, and Firefox < 22.\r\n */\r\n\r\n[hidden],\r\ntemplate {\r\n  display: none;\r\n}\r\n\r\n/* Links\r\n   ========================================================================== */\r\n\r\n/**\r\n * Remove the gray background color from active links in IE 10.\r\n */\r\n\r\na {\r\n  background-color: transparent;\r\n}\r\n\r\n/**\r\n * Improve readability when focused and also mouse hovered in all browsers.\r\n */\r\n\r\na:active,\r\na:hover {\r\n  outline: 0;\r\n}\r\n\r\n/* Text-level semantics\r\n   ========================================================================== */\r\n\r\n/**\r\n * Address styling not present in IE 8/9/10/11, Safari, and Chrome.\r\n */\r\n\r\nabbr[title] {\r\n  border-bottom: 1px dotted;\r\n}\r\n\r\n/**\r\n * Address style set to `bolder` in Firefox 4+, Safari, and Chrome.\r\n */\r\n\r\nb,\r\nstrong {\r\n  font-weight: bold;\r\n}\r\n\r\n/**\r\n * Address styling not present in Safari and Chrome.\r\n */\r\n\r\ndfn {\r\n  font-style: italic;\r\n}\r\n\r\n/**\r\n * Address variable `h1` font-size and margin within `section` and `article`\r\n * contexts in Firefox 4+, Safari, and Chrome.\r\n */\r\n\r\nh1 {\r\n  font-size: 2em;\r\n  margin: 0.67em 0;\r\n}\r\n\r\n/**\r\n * Address styling not present in IE 8/9.\r\n */\r\n\r\nmark {\r\n  background: #ff0;\r\n  color: #000;\r\n}\r\n\r\n/**\r\n * Address inconsistent and variable font size in all browsers.\r\n */\r\n\r\nsmall {\r\n  font-size: 80%;\r\n}\r\n\r\n/**\r\n * Prevent `sub` and `sup` affecting `line-height` in all browsers.\r\n */\r\n\r\nsub,\r\nsup {\r\n  font-size: 75%;\r\n  line-height: 0;\r\n  position: relative;\r\n  vertical-align: baseline;\r\n}\r\n\r\nsup {\r\n  top: -0.5em;\r\n}\r\n\r\nsub {\r\n  bottom: -0.25em;\r\n}\r\n\r\n/* Embedded content\r\n   ========================================================================== */\r\n\r\n/**\r\n * Remove border when inside `a` element in IE 8/9/10.\r\n */\r\n\r\nimg {\r\n  border: 0;\r\n}\r\n\r\n/**\r\n * Correct overflow not hidden in IE 9/10/11.\r\n */\r\n\r\nsvg:not(:root) {\r\n  overflow: hidden;\r\n}\r\n\r\n/* Grouping content\r\n   ========================================================================== */\r\n\r\n/**\r\n * Address margin not present in IE 8/9 and Safari.\r\n */\r\n\r\nfigure {\r\n  margin: 1em 40px;\r\n}\r\n\r\n/**\r\n * Address differences between Firefox and other browsers.\r\n */\r\n\r\nhr {\r\n  -moz-box-sizing: content-box;\r\n  box-sizing: content-box;\r\n  height: 0;\r\n}\r\n\r\n/**\r\n * Contain overflow in all browsers.\r\n */\r\n\r\npre {\r\n  overflow: auto;\r\n}\r\n\r\n/**\r\n * Address odd `em`-unit font size rendering in all browsers.\r\n */\r\n\r\ncode,\r\nkbd,\r\npre,\r\nsamp {\r\n  font-family: monospace, monospace;\r\n  font-size: 1em;\r\n}\r\n\r\n/* Forms\r\n   ========================================================================== */\r\n\r\n/**\r\n * Known limitation: by default, Chrome and Safari on OS X allow very limited\r\n * styling of `select`, unless a `border` property is set.\r\n */\r\n\r\n/**\r\n * 1. Correct color not being inherited.\r\n *    Known issue: affects color of disabled elements.\r\n * 2. Correct font properties not being inherited.\r\n * 3. Address margins set differently in Firefox 4+, Safari, and Chrome.\r\n */\r\n\r\nbutton,\r\ninput,\r\noptgroup,\r\nselect,\r\ntextarea {\r\n  color: inherit; /* 1 */\r\n  font: inherit; /* 2 */\r\n  margin: 0; /* 3 */\r\n}\r\n\r\n/**\r\n * Address `overflow` set to `hidden` in IE 8/9/10/11.\r\n */\r\n\r\nbutton {\r\n  overflow: visible;\r\n}\r\n\r\n/**\r\n * Address inconsistent `text-transform` inheritance for `button` and `select`.\r\n * All other form control elements do not inherit `text-transform` values.\r\n * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.\r\n * Correct `select` style inheritance in Firefox.\r\n */\r\n\r\nbutton,\r\nselect {\r\n  text-transform: none;\r\n}\r\n\r\n/**\r\n * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`\r\n *    and `video` controls.\r\n * 2. Correct inability to style clickable `input` types in iOS.\r\n * 3. Improve usability and consistency of cursor style between image-type\r\n *    `input` and others.\r\n */\r\n\r\nbutton,\r\nhtml input[type=\"button\"], /* 1 */\r\ninput[type=\"reset\"],\r\ninput[type=\"submit\"] {\r\n  -webkit-appearance: button; /* 2 */\r\n  cursor: pointer; /* 3 */\r\n}\r\n\r\n/**\r\n * Re-set default cursor for disabled elements.\r\n */\r\n\r\nbutton[disabled],\r\nhtml input[disabled] {\r\n  cursor: default;\r\n}\r\n\r\n/**\r\n * Remove inner padding and border in Firefox 4+.\r\n */\r\n\r\nbutton::-moz-focus-inner,\r\ninput::-moz-focus-inner {\r\n  border: 0;\r\n  padding: 0;\r\n}\r\n\r\n/**\r\n * Address Firefox 4+ setting `line-height` on `input` using `!important` in\r\n * the UA stylesheet.\r\n */\r\n\r\ninput {\r\n  line-height: normal;\r\n}\r\n\r\n/**\r\n * It's recommended that you don't attempt to style these elements.\r\n * Firefox's implementation doesn't respect box-sizing, padding, or width.\r\n *\r\n * 1. Address box sizing set to `content-box` in IE 8/9/10.\r\n * 2. Remove excess padding in IE 8/9/10.\r\n */\r\n\r\ninput[type=\"checkbox\"],\r\ninput[type=\"radio\"] {\r\n  box-sizing: border-box; /* 1 */\r\n  padding: 0; /* 2 */\r\n}\r\n\r\n/**\r\n * Fix the cursor style for Chrome's increment/decrement buttons. For certain\r\n * `font-size` values of the `input`, it causes the cursor style of the\r\n * decrement button to change from `default` to `text`.\r\n */\r\n\r\ninput[type=\"number\"]::-webkit-inner-spin-button,\r\ninput[type=\"number\"]::-webkit-outer-spin-button {\r\n  height: auto;\r\n}\r\n\r\n/**\r\n * 1. Address `appearance` set to `searchfield` in Safari and Chrome.\r\n * 2. Address `box-sizing` set to `border-box` in Safari and Chrome\r\n *    (include `-moz` to future-proof).\r\n */\r\n\r\ninput[type=\"search\"] {\r\n  -webkit-appearance: textfield; /* 1 */\r\n  -moz-box-sizing: content-box;\r\n  -webkit-box-sizing: content-box; /* 2 */\r\n  box-sizing: content-box;\r\n}\r\n\r\n/**\r\n * Remove inner padding and search cancel button in Safari and Chrome on OS X.\r\n * Safari (but not Chrome) clips the cancel button when the search input has\r\n * padding (and `textfield` appearance).\r\n */\r\n\r\ninput[type=\"search\"]::-webkit-search-cancel-button,\r\ninput[type=\"search\"]::-webkit-search-decoration {\r\n  -webkit-appearance: none;\r\n}\r\n\r\n/**\r\n * Define consistent border, margin, and padding.\r\n */\r\n\r\nfieldset {\r\n  border: 1px solid #c0c0c0;\r\n  margin: 0 2px;\r\n  padding: 0.35em 0.625em 0.75em;\r\n}\r\n\r\n/**\r\n * 1. Correct `color` not being inherited in IE 8/9/10/11.\r\n * 2. Remove padding so people aren't caught out if they zero out fieldsets.\r\n */\r\n\r\nlegend {\r\n  border: 0; /* 1 */\r\n  padding: 0; /* 2 */\r\n}\r\n\r\n/**\r\n * Remove default vertical scrollbar in IE 8/9/10/11.\r\n */\r\n\r\ntextarea {\r\n  overflow: auto;\r\n}\r\n\r\n/**\r\n * Don't inherit the `font-weight` (applied by a rule above).\r\n * NOTE: the default cannot safely be changed in Chrome and Safari on OS X.\r\n */\r\n\r\noptgroup {\r\n  font-weight: bold;\r\n}\r\n\r\n/* Tables\r\n   ========================================================================== */\r\n\r\n/**\r\n * Remove most spacing between table cells.\r\n */\r\n\r\ntable {\r\n  border-collapse: collapse;\r\n  border-spacing: 0;\r\n}\r\n\r\ntd,\r\nth {\r\n  padding: 0;\r\n}", ""]);
+	exports.push([module.id, "/*! normalize.css v3.0.2 | MIT License | git.io/normalize */\n\n/**\n * 1. Set default font family to sans-serif.\n * 2. Prevent iOS text size adjust after orientation change, without disabling\n *    user zoom.\n */\n\nhtml {\n  font-family: sans-serif; /* 1 */\n  -ms-text-size-adjust: 100%; /* 2 */\n  -webkit-text-size-adjust: 100%; /* 2 */\n}\n\n/**\n * Remove default margin.\n */\n\nbody {\n  margin: 0;\n}\n\n/* HTML5 display definitions\n   ========================================================================== */\n\n/**\n * Correct `block` display not defined for any HTML5 element in IE 8/9.\n * Correct `block` display not defined for `details` or `summary` in IE 10/11\n * and Firefox.\n * Correct `block` display not defined for `main` in IE 11.\n */\n\narticle,\naside,\ndetails,\nfigcaption,\nfigure,\nfooter,\nheader,\nhgroup,\nmain,\nmenu,\nnav,\nsection,\nsummary {\n  display: block;\n}\n\n/**\n * 1. Correct `inline-block` display not defined in IE 8/9.\n * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.\n */\n\naudio,\ncanvas,\nprogress,\nvideo {\n  display: inline-block; /* 1 */\n  vertical-align: baseline; /* 2 */\n}\n\n/**\n * Prevent modern browsers from displaying `audio` without controls.\n * Remove excess height in iOS 5 devices.\n */\n\naudio:not([controls]) {\n  display: none;\n  height: 0;\n}\n\n/**\n * Address `[hidden]` styling not present in IE 8/9/10.\n * Hide the `template` element in IE 8/9/11, Safari, and Firefox < 22.\n */\n\n[hidden],\ntemplate {\n  display: none;\n}\n\n/* Links\n   ========================================================================== */\n\n/**\n * Remove the gray background color from active links in IE 10.\n */\n\na {\n  background-color: transparent;\n}\n\n/**\n * Improve readability when focused and also mouse hovered in all browsers.\n */\n\na:active,\na:hover {\n  outline: 0;\n}\n\n/* Text-level semantics\n   ========================================================================== */\n\n/**\n * Address styling not present in IE 8/9/10/11, Safari, and Chrome.\n */\n\nabbr[title] {\n  border-bottom: 1px dotted;\n}\n\n/**\n * Address style set to `bolder` in Firefox 4+, Safari, and Chrome.\n */\n\nb,\nstrong {\n  font-weight: bold;\n}\n\n/**\n * Address styling not present in Safari and Chrome.\n */\n\ndfn {\n  font-style: italic;\n}\n\n/**\n * Address variable `h1` font-size and margin within `section` and `article`\n * contexts in Firefox 4+, Safari, and Chrome.\n */\n\nh1 {\n  font-size: 2em;\n  margin: 0.67em 0;\n}\n\n/**\n * Address styling not present in IE 8/9.\n */\n\nmark {\n  background: #ff0;\n  color: #000;\n}\n\n/**\n * Address inconsistent and variable font size in all browsers.\n */\n\nsmall {\n  font-size: 80%;\n}\n\n/**\n * Prevent `sub` and `sup` affecting `line-height` in all browsers.\n */\n\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\n\nsup {\n  top: -0.5em;\n}\n\nsub {\n  bottom: -0.25em;\n}\n\n/* Embedded content\n   ========================================================================== */\n\n/**\n * Remove border when inside `a` element in IE 8/9/10.\n */\n\nimg {\n  border: 0;\n}\n\n/**\n * Correct overflow not hidden in IE 9/10/11.\n */\n\nsvg:not(:root) {\n  overflow: hidden;\n}\n\n/* Grouping content\n   ========================================================================== */\n\n/**\n * Address margin not present in IE 8/9 and Safari.\n */\n\nfigure {\n  margin: 1em 40px;\n}\n\n/**\n * Address differences between Firefox and other browsers.\n */\n\nhr {\n  -moz-box-sizing: content-box;\n  box-sizing: content-box;\n  height: 0;\n}\n\n/**\n * Contain overflow in all browsers.\n */\n\npre {\n  overflow: auto;\n}\n\n/**\n * Address odd `em`-unit font size rendering in all browsers.\n */\n\ncode,\nkbd,\npre,\nsamp {\n  font-family: monospace, monospace;\n  font-size: 1em;\n}\n\n/* Forms\n   ========================================================================== */\n\n/**\n * Known limitation: by default, Chrome and Safari on OS X allow very limited\n * styling of `select`, unless a `border` property is set.\n */\n\n/**\n * 1. Correct color not being inherited.\n *    Known issue: affects color of disabled elements.\n * 2. Correct font properties not being inherited.\n * 3. Address margins set differently in Firefox 4+, Safari, and Chrome.\n */\n\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  color: inherit; /* 1 */\n  font: inherit; /* 2 */\n  margin: 0; /* 3 */\n}\n\n/**\n * Address `overflow` set to `hidden` in IE 8/9/10/11.\n */\n\nbutton {\n  overflow: visible;\n}\n\n/**\n * Address inconsistent `text-transform` inheritance for `button` and `select`.\n * All other form control elements do not inherit `text-transform` values.\n * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.\n * Correct `select` style inheritance in Firefox.\n */\n\nbutton,\nselect {\n  text-transform: none;\n}\n\n/**\n * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`\n *    and `video` controls.\n * 2. Correct inability to style clickable `input` types in iOS.\n * 3. Improve usability and consistency of cursor style between image-type\n *    `input` and others.\n */\n\nbutton,\nhtml input[type=\"button\"], /* 1 */\ninput[type=\"reset\"],\ninput[type=\"submit\"] {\n  -webkit-appearance: button; /* 2 */\n  cursor: pointer; /* 3 */\n}\n\n/**\n * Re-set default cursor for disabled elements.\n */\n\nbutton[disabled],\nhtml input[disabled] {\n  cursor: default;\n}\n\n/**\n * Remove inner padding and border in Firefox 4+.\n */\n\nbutton::-moz-focus-inner,\ninput::-moz-focus-inner {\n  border: 0;\n  padding: 0;\n}\n\n/**\n * Address Firefox 4+ setting `line-height` on `input` using `!important` in\n * the UA stylesheet.\n */\n\ninput {\n  line-height: normal;\n}\n\n/**\n * It's recommended that you don't attempt to style these elements.\n * Firefox's implementation doesn't respect box-sizing, padding, or width.\n *\n * 1. Address box sizing set to `content-box` in IE 8/9/10.\n * 2. Remove excess padding in IE 8/9/10.\n */\n\ninput[type=\"checkbox\"],\ninput[type=\"radio\"] {\n  box-sizing: border-box; /* 1 */\n  padding: 0; /* 2 */\n}\n\n/**\n * Fix the cursor style for Chrome's increment/decrement buttons. For certain\n * `font-size` values of the `input`, it causes the cursor style of the\n * decrement button to change from `default` to `text`.\n */\n\ninput[type=\"number\"]::-webkit-inner-spin-button,\ninput[type=\"number\"]::-webkit-outer-spin-button {\n  height: auto;\n}\n\n/**\n * 1. Address `appearance` set to `searchfield` in Safari and Chrome.\n * 2. Address `box-sizing` set to `border-box` in Safari and Chrome\n *    (include `-moz` to future-proof).\n */\n\ninput[type=\"search\"] {\n  -webkit-appearance: textfield; /* 1 */\n  -moz-box-sizing: content-box;\n  -webkit-box-sizing: content-box; /* 2 */\n  box-sizing: content-box;\n}\n\n/**\n * Remove inner padding and search cancel button in Safari and Chrome on OS X.\n * Safari (but not Chrome) clips the cancel button when the search input has\n * padding (and `textfield` appearance).\n */\n\ninput[type=\"search\"]::-webkit-search-cancel-button,\ninput[type=\"search\"]::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n/**\n * Define consistent border, margin, and padding.\n */\n\nfieldset {\n  border: 1px solid #c0c0c0;\n  margin: 0 2px;\n  padding: 0.35em 0.625em 0.75em;\n}\n\n/**\n * 1. Correct `color` not being inherited in IE 8/9/10/11.\n * 2. Remove padding so people aren't caught out if they zero out fieldsets.\n */\n\nlegend {\n  border: 0; /* 1 */\n  padding: 0; /* 2 */\n}\n\n/**\n * Remove default vertical scrollbar in IE 8/9/10/11.\n */\n\ntextarea {\n  overflow: auto;\n}\n\n/**\n * Don't inherit the `font-weight` (applied by a rule above).\n * NOTE: the default cannot safely be changed in Chrome and Safari on OS X.\n */\n\noptgroup {\n  font-weight: bold;\n}\n\n/* Tables\n   ========================================================================== */\n\n/**\n * Remove most spacing between table cells.\n */\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\n\ntd,\nth {\n  padding: 0;\n}", ""]);
 	
 	// exports
 
@@ -449,7 +449,7 @@
 	
 	
 	// module
-	exports.push([module.id, "p, h2, h4, div, ol, ul, li {\r\n\tpadding: 0;\r\n\tmargin: 0;\r\n}\r\n\r\na {\r\n\ttext-decoration: none;\r\n}\r\n\r\ninput, button {\r\n\toutline: none;\r\n\tfont-family: inherit;\r\n\t-webkit-appearance: none;\r\n}\r\n\r\nh2, h4 {\r\n\tfont-weight: 400;\r\n}\r\n\r\nli {\r\n\tlist-style: none;\r\n}\r\n\r\ntable {\r\n\tborder-collapse: collapse;\r\n\tborder-spacing: 0;\r\n}\r\n\r\nbody {\r\n\tfont-size: 14px;\r\n\tfont-family: \"STHeiti\", \"Microsoft YaHei\", Helvetica, Arial, sans-serif;\r\n}", ""]);
+	exports.push([module.id, "p, h2, h4, div, ol, ul, li {\n\tpadding: 0;\n\tmargin: 0;\n}\n\na {\n\ttext-decoration: none;\n}\n\ninput, button {\n\toutline: none;\n\tfont-family: inherit;\n\t-webkit-appearance: none;\n}\n\nh2, h4 {\n\tfont-weight: 400;\n}\n\nli {\n\tlist-style: none;\n}\n\ntable {\n\tborder-collapse: collapse;\n\tborder-spacing: 0;\n}\n\nbody {\n\tfont-size: 14px;\n\tfont-family: \"STHeiti\", \"Microsoft YaHei\", Helvetica, Arial, sans-serif;\n}", ""]);
 	
 	// exports
 
@@ -489,7 +489,7 @@
 	
 	
 	// module
-	exports.push([module.id, "#app {\r\n\twidth: 300px;\r\n\tmargin: 50px auto;\r\n}\r\n\r\n.input {\r\n\twidth: 300px;\r\n\tpadding: 10px;\r\n\tborder: 1px solid #DDD;\r\n\tbox-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);\r\n\ttransition: all 0.3s;\r\n\r\n\t&:focus {\r\n\t\tborder-color: #51A7E8;\r\n\t\tbox-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075), 0 0 10px rgba(81, 167, 232, 0.5);\r\n\t}\r\n}", ""]);
+	exports.push([module.id, "#app {\n\twidth: 300px;\n\tmargin: 50px auto;\n}\n\n.input {\n\twidth: 300px;\n\tpadding: 10px;\n\tborder: 1px solid #DDD;\n\tbox-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);\n\ttransition: all 0.3s;\n\n\t&:focus {\n\t\tborder-color: #51A7E8;\n\t\tbox-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075), 0 0 10px rgba(81, 167, 232, 0.5);\n\t}\n}", ""]);
 	
 	// exports
 
@@ -499,7 +499,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, process) {/*!
-	 * Vue.js v1.0.21
+	 * Vue.js v1.0.26
 	 * (c) 2016 Evan You
 	 * Released under the MIT License.
 	 */
@@ -546,6 +546,10 @@
 	  delete obj[key];
 	  var ob = obj.__ob__;
 	  if (!ob) {
+	    if (obj._isVue) {
+	      delete obj._data[key];
+	      obj._digest();
+	    }
 	    return;
 	  }
 	  ob.dep.notify();
@@ -894,8 +898,15 @@
 	
 	// UA sniffing for working around browser-specific quirks
 	var UA = inBrowser && window.navigator.userAgent.toLowerCase();
+	var isIE = UA && UA.indexOf('trident') > 0;
 	var isIE9 = UA && UA.indexOf('msie 9.0') > 0;
 	var isAndroid = UA && UA.indexOf('android') > 0;
+	var isIos = UA && /(iphone|ipad|ipod|ios)/i.test(UA);
+	var iosVersionMatch = isIos && UA.match(/os ([\d_]+)/);
+	var iosVersion = iosVersionMatch && iosVersionMatch[1].split('_');
+	
+	// detecting iOS UIWebView by indexedDB
+	var hasMutationObserverBug = iosVersion && Number(iosVersion[0]) >= 9 && Number(iosVersion[1]) >= 3 && !window.indexedDB;
 	
 	var transitionProp = undefined;
 	var transitionEndEvent = undefined;
@@ -936,7 +947,7 @@
 	  }
 	
 	  /* istanbul ignore if */
-	  if (typeof MutationObserver !== 'undefined') {
+	  if (typeof MutationObserver !== 'undefined' && !hasMutationObserverBug) {
 	    var counter = 1;
 	    var observer = new MutationObserver(nextTickHandler);
 	    var textNode = document.createTextNode(counter);
@@ -965,6 +976,27 @@
 	  };
 	})();
 	
+	var _Set = undefined;
+	/* istanbul ignore if */
+	if (typeof Set !== 'undefined' && Set.toString().match(/native code/)) {
+	  // use native Set when available.
+	  _Set = Set;
+	} else {
+	  // a non-standard Set polyfill that only works with primitive keys.
+	  _Set = function () {
+	    this.set = Object.create(null);
+	  };
+	  _Set.prototype.has = function (key) {
+	    return this.set[key] !== undefined;
+	  };
+	  _Set.prototype.add = function (key) {
+	    this.set[key] = 1;
+	  };
+	  _Set.prototype.clear = function () {
+	    this.set = Object.create(null);
+	  };
+	}
+	
 	function Cache(limit) {
 	  this.size = 0;
 	  this.limit = limit;
@@ -987,12 +1019,12 @@
 	
 	p.put = function (key, value) {
 	  var removed;
-	  if (this.size === this.limit) {
-	    removed = this.shift();
-	  }
 	
 	  var entry = this.get(key, true);
 	  if (!entry) {
+	    if (this.size === this.limit) {
+	      removed = this.shift();
+	    }
 	    entry = {
 	      key: key
 	    };
@@ -1237,7 +1269,7 @@
 	  var unsafeOpen = escapeRegex(config.unsafeDelimiters[0]);
 	  var unsafeClose = escapeRegex(config.unsafeDelimiters[1]);
 	  tagRE = new RegExp(unsafeOpen + '((?:.|\\n)+?)' + unsafeClose + '|' + open + '((?:.|\\n)+?)' + close, 'g');
-	  htmlRE = new RegExp('^' + unsafeOpen + '.*' + unsafeClose + '$');
+	  htmlRE = new RegExp('^' + unsafeOpen + '((?:.|\\n)+?)' + unsafeClose + '$');
 	  // reset cache
 	  cache = new Cache(1000);
 	}
@@ -1609,8 +1641,9 @@
 	 */
 	
 	function inDoc(node) {
-	  var doc = document.documentElement;
-	  var parent = node && node.parentNode;
+	  if (!node) return false;
+	  var doc = node.ownerDocument.documentElement;
+	  var parent = node.parentNode;
 	  return doc === node || doc === parent || !!(parent && parent.nodeType === 1 && doc.contains(parent));
 	}
 	
@@ -2023,7 +2056,8 @@
 	      return (/HTMLUnknownElement/.test(el.toString()) &&
 	        // Chrome returns unknown for several HTML5 elements.
 	        // https://code.google.com/p/chromium/issues/detail?id=540526
-	        !/^(data|time|rtc|rb)$/.test(tag)
+	        // Firefox returns unknown for some "Interactive elements."
+	        !/^(data|time|rtc|rb|details|dialog|summary)$/.test(tag)
 	      );
 	    }
 	  };
@@ -2045,7 +2079,7 @@
 	    if (resolveAsset(options, 'components', tag)) {
 	      return { id: tag };
 	    } else {
-	      var is = hasAttrs && getIsBinding(el);
+	      var is = hasAttrs && getIsBinding(el, options);
 	      if (is) {
 	        return is;
 	      } else if (process.env.NODE_ENV !== 'production') {
@@ -2058,7 +2092,7 @@
 	      }
 	    }
 	  } else if (hasAttrs) {
-	    return getIsBinding(el);
+	    return getIsBinding(el, options);
 	  }
 	}
 	
@@ -2066,14 +2100,18 @@
 	 * Get "is" binding from an element.
 	 *
 	 * @param {Element} el
+	 * @param {Object} options
 	 * @return {Object|undefined}
 	 */
 	
-	function getIsBinding(el) {
+	function getIsBinding(el, options) {
 	  // dynamic syntax
-	  var exp = getAttr(el, 'is');
+	  var exp = el.getAttribute('is');
 	  if (exp != null) {
-	    return { id: exp };
+	    if (resolveAsset(options, 'components', exp)) {
+	      el.removeAttribute('is');
+	      return { id: exp };
+	    }
 	  } else {
 	    exp = getBindAttr(el, 'is');
 	    if (exp != null) {
@@ -2184,7 +2222,7 @@
 	 */
 	
 	function mergeAssets(parentVal, childVal) {
-	  var res = Object.create(parentVal);
+	  var res = Object.create(parentVal || null);
 	  return childVal ? extend(res, guardArrayAssets(childVal)) : res;
 	}
 	
@@ -2343,11 +2381,21 @@
 	function mergeOptions(parent, child, vm) {
 	  guardComponents(child);
 	  guardProps(child);
+	  if (process.env.NODE_ENV !== 'production') {
+	    if (child.propsData && !vm) {
+	      warn('propsData can only be used as an instantiation option.');
+	    }
+	  }
 	  var options = {};
 	  var key;
+	  if (child['extends']) {
+	    parent = typeof child['extends'] === 'function' ? mergeOptions(parent, child['extends'].options, vm) : mergeOptions(parent, child['extends'], vm);
+	  }
 	  if (child.mixins) {
 	    for (var i = 0, l = child.mixins.length; i < l; i++) {
-	      parent = mergeOptions(parent, child.mixins[i], vm);
+	      var mixin = child.mixins[i];
+	      var mixinOptions = mixin.prototype instanceof Vue ? mixin.options : mixin;
+	      parent = mergeOptions(parent, mixinOptions, vm);
 	    }
 	  }
 	  for (key in parent) {
@@ -2775,13 +2823,19 @@
 		hasProto: hasProto,
 		inBrowser: inBrowser,
 		devtools: devtools,
+		isIE: isIE,
 		isIE9: isIE9,
 		isAndroid: isAndroid,
+		isIos: isIos,
+		iosVersionMatch: iosVersionMatch,
+		iosVersion: iosVersion,
+		hasMutationObserverBug: hasMutationObserverBug,
 		get transitionProp () { return transitionProp; },
 		get transitionEndEvent () { return transitionEndEvent; },
 		get animationProp () { return animationProp; },
 		get animationEndEvent () { return animationEndEvent; },
 		nextTick: nextTick,
+		get _Set () { return _Set; },
 		query: query,
 		inDoc: inDoc,
 		getAttr: getAttr,
@@ -2894,13 +2948,8 @@
 	    this._updateRef();
 	
 	    // initialize data as empty object.
-	    // it will be filled up in _initScope().
+	    // it will be filled up in _initData().
 	    this._data = {};
-	
-	    // save raw constructor data before merge
-	    // so that we know which properties are provided at
-	    // instantiation.
-	    this._runtimeData = options.data;
 	
 	    // call init hook
 	    this._callHook('init');
@@ -3268,7 +3317,9 @@
 	var restoreRE = /"(\d+)"/g;
 	var pathTestRE = /^[A-Za-z_$][\w$]*(?:\.[A-Za-z_$][\w$]*|\['.*?'\]|\[".*?"\]|\[\d+\]|\[[A-Za-z_$][\w$]*\])*$/;
 	var identRE = /[^\w$\.](?:[A-Za-z_$][\w$]*)/g;
-	var booleanLiteralRE = /^(?:true|false)$/;
+	var literalValueRE$1 = /^(?:true|false|null|undefined|Infinity|NaN)$/;
+	
+	function noop() {}
 	
 	/**
 	 * Save / Rewrite / Restore
@@ -3350,7 +3401,7 @@
 	  // save strings and object literal keys
 	  var body = exp.replace(saveRE, save).replace(wsRE, '');
 	  // rewrite all paths
-	  // pad 1 space here becaue the regex matches 1 extra char
+	  // pad 1 space here because the regex matches 1 extra char
 	  body = (' ' + body).replace(identRE, rewrite).replace(restoreRE, restore);
 	  return makeGetterFn(body);
 	}
@@ -3371,7 +3422,15 @@
 	    return new Function('scope', 'return ' + body + ';');
 	    /* eslint-enable no-new-func */
 	  } catch (e) {
-	    process.env.NODE_ENV !== 'production' && warn('Invalid expression. ' + 'Generated function body: ' + body);
+	    if (process.env.NODE_ENV !== 'production') {
+	      /* istanbul ignore if */
+	      if (e.toString().match(/unsafe-eval|CSP/)) {
+	        warn('It seems you are using the default build of Vue.js in an environment ' + 'with Content Security Policy that prohibits unsafe-eval. ' + 'Use the CSP-compliant build instead: ' + 'http://vuejs.org/guide/installation.html#CSP-compliant-build');
+	      } else {
+	        warn('Invalid expression. ' + 'Generated function body: ' + body);
+	      }
+	    }
+	    return noop;
 	  }
 	}
 	
@@ -3433,8 +3492,8 @@
 	
 	function isSimplePath(exp) {
 	  return pathTestRE.test(exp) &&
-	  // don't treat true/false as paths
-	  !booleanLiteralRE.test(exp) &&
+	  // don't treat literal values as paths
+	  !literalValueRE$1.test(exp) &&
 	  // Math constants e.g. Math.PI, Math.E etc.
 	  exp.slice(0, 5) !== 'Math.';
 	}
@@ -3451,24 +3510,22 @@
 	// triggered, the DOM would have already been in updated
 	// state.
 	
-	var queueIndex;
 	var queue = [];
 	var userQueue = [];
 	var has = {};
 	var circular = {};
 	var waiting = false;
-	var internalQueueDepleted = false;
 	
 	/**
 	 * Reset the batcher's state.
 	 */
 	
 	function resetBatcherState() {
-	  queue = [];
-	  userQueue = [];
+	  queue.length = 0;
+	  userQueue.length = 0;
 	  has = {};
 	  circular = {};
-	  waiting = internalQueueDepleted = false;
+	  waiting = false;
 	}
 	
 	/**
@@ -3476,15 +3533,26 @@
 	 */
 	
 	function flushBatcherQueue() {
-	  runBatcherQueue(queue);
-	  internalQueueDepleted = true;
-	  runBatcherQueue(userQueue);
-	  // dev tool hook
-	  /* istanbul ignore if */
-	  if (devtools && config.devtools) {
-	    devtools.emit('flush');
+	  var _again = true;
+	
+	  _function: while (_again) {
+	    _again = false;
+	
+	    runBatcherQueue(queue);
+	    runBatcherQueue(userQueue);
+	    // user watchers triggered more watchers,
+	    // keep flushing until it depletes
+	    if (queue.length) {
+	      _again = true;
+	      continue _function;
+	    }
+	    // dev tool hook
+	    /* istanbul ignore if */
+	    if (devtools && config.devtools) {
+	      devtools.emit('flush');
+	    }
+	    resetBatcherState();
 	  }
-	  resetBatcherState();
 	}
 	
 	/**
@@ -3496,8 +3564,8 @@
 	function runBatcherQueue(queue) {
 	  // do not cache length because more watchers might be pushed
 	  // as we run existing watchers
-	  for (queueIndex = 0; queueIndex < queue.length; queueIndex++) {
-	    var watcher = queue[queueIndex];
+	  for (var i = 0; i < queue.length; i++) {
+	    var watcher = queue[i];
 	    var id = watcher.id;
 	    has[id] = null;
 	    watcher.run();
@@ -3510,6 +3578,7 @@
 	      }
 	    }
 	  }
+	  queue.length = 0;
 	}
 	
 	/**
@@ -3526,20 +3595,14 @@
 	function pushWatcher(watcher) {
 	  var id = watcher.id;
 	  if (has[id] == null) {
-	    if (internalQueueDepleted && !watcher.user) {
-	      // an internal watcher triggered by a user watcher...
-	      // let's run it immediately after current user watcher is done.
-	      userQueue.splice(queueIndex + 1, 0, watcher);
-	    } else {
-	      // push watcher into appropriate queue
-	      var q = watcher.user ? userQueue : queue;
-	      has[id] = q.length;
-	      q.push(watcher);
-	      // queue the flush
-	      if (!waiting) {
-	        waiting = true;
-	        nextTick(flushBatcherQueue);
-	      }
+	    // push watcher into appropriate queue
+	    var q = watcher.user ? userQueue : queue;
+	    has[id] = q.length;
+	    q.push(watcher);
+	    // queue the flush
+	    if (!waiting) {
+	      waiting = true;
+	      nextTick(flushBatcherQueue);
 	    }
 	  }
 	}
@@ -3580,8 +3643,8 @@
 	  this.dirty = this.lazy; // for lazy watchers
 	  this.deps = [];
 	  this.newDeps = [];
-	  this.depIds = Object.create(null);
-	  this.newDepIds = null;
+	  this.depIds = new _Set();
+	  this.newDepIds = new _Set();
 	  this.prevError = null; // for async error stacks
 	  // parse expression for getter/setter
 	  if (isFn) {
@@ -3673,8 +3736,6 @@
 	
 	Watcher.prototype.beforeGet = function () {
 	  Dep.target = this;
-	  this.newDepIds = Object.create(null);
-	  this.newDeps.length = 0;
 	};
 	
 	/**
@@ -3685,10 +3746,10 @@
 	
 	Watcher.prototype.addDep = function (dep) {
 	  var id = dep.id;
-	  if (!this.newDepIds[id]) {
-	    this.newDepIds[id] = true;
+	  if (!this.newDepIds.has(id)) {
+	    this.newDepIds.add(id);
 	    this.newDeps.push(dep);
-	    if (!this.depIds[id]) {
+	    if (!this.depIds.has(id)) {
 	      dep.addSub(this);
 	    }
 	  }
@@ -3703,14 +3764,18 @@
 	  var i = this.deps.length;
 	  while (i--) {
 	    var dep = this.deps[i];
-	    if (!this.newDepIds[dep.id]) {
+	    if (!this.newDepIds.has(dep.id)) {
 	      dep.removeSub(this);
 	    }
 	  }
+	  var tmp = this.depIds;
 	  this.depIds = this.newDepIds;
-	  var tmp = this.deps;
+	  this.newDepIds = tmp;
+	  this.newDepIds.clear();
+	  tmp = this.deps;
 	  this.deps = this.newDeps;
 	  this.newDeps = tmp;
+	  this.newDeps.length = 0;
 	};
 	
 	/**
@@ -3834,15 +3899,33 @@
 	 * @param {*} val
 	 */
 	
-	function traverse(val) {
-	  var i, keys;
-	  if (isArray(val)) {
-	    i = val.length;
-	    while (i--) traverse(val[i]);
-	  } else if (isObject(val)) {
-	    keys = Object.keys(val);
-	    i = keys.length;
-	    while (i--) traverse(val[keys[i]]);
+	var seenObjects = new _Set();
+	function traverse(val, seen) {
+	  var i = undefined,
+	      keys = undefined;
+	  if (!seen) {
+	    seen = seenObjects;
+	    seen.clear();
+	  }
+	  var isA = isArray(val);
+	  var isO = isObject(val);
+	  if ((isA || isO) && Object.isExtensible(val)) {
+	    if (val.__ob__) {
+	      var depId = val.__ob__.dep.id;
+	      if (seen.has(depId)) {
+	        return;
+	      } else {
+	        seen.add(depId);
+	      }
+	    }
+	    if (isA) {
+	      i = val.length;
+	      while (i--) traverse(val[i], seen);
+	    } else if (isO) {
+	      keys = Object.keys(val);
+	      i = keys.length;
+	      while (i--) traverse(val[keys[i]], seen);
+	    }
 	  }
 	}
 	
@@ -3889,6 +3972,7 @@
 	
 	var tagRE$1 = /<([\w:-]+)/;
 	var entityRE = /&#?\w+?;/;
+	var commentRE = /<!--/;
 	
 	/**
 	 * Convert a string template to a DocumentFragment.
@@ -3911,8 +3995,9 @@
 	  var frag = document.createDocumentFragment();
 	  var tagMatch = templateString.match(tagRE$1);
 	  var entityMatch = entityRE.test(templateString);
+	  var commentMatch = commentRE.test(templateString);
 	
-	  if (!tagMatch && !entityMatch) {
+	  if (!tagMatch && !entityMatch && !commentMatch) {
 	    // text only, return a single text node.
 	    frag.appendChild(document.createTextNode(templateString));
 	  } else {
@@ -3951,10 +4036,13 @@
 	
 	function nodeToFragment(node) {
 	  // if its a template tag and the browser supports it,
-	  // its content is already a document fragment.
+	  // its content is already a document fragment. However, iOS Safari has
+	  // bug when using directly cloned template content with touch
+	  // events and can cause crashes when the nodes are removed from DOM, so we
+	  // have to treat template elements as string templates. (#2805)
+	  /* istanbul ignore if */
 	  if (isRealTemplate(node)) {
-	    trimNode(node.content);
-	    return node.content;
+	    return stringToFragment(node.innerHTML);
 	  }
 	  // script template
 	  if (node.tagName === 'SCRIPT') {
@@ -4350,7 +4438,7 @@
 	  this.vm = vm;
 	  var template;
 	  var isString = typeof el === 'string';
-	  if (isString || isTemplate(el)) {
+	  if (isString || isTemplate(el) && !el.hasAttribute('v-if')) {
 	    template = parseTemplate(el, true);
 	  } else {
 	    template = document.createDocumentFragment();
@@ -4692,7 +4780,15 @@
 	      });
 	      setTimeout(op, staggerAmount);
 	    } else {
-	      frag.before(prevEl.nextSibling);
+	      var target = prevEl.nextSibling;
+	      /* istanbul ignore if */
+	      if (!target) {
+	        // reset end anchor position in case the position was messed up
+	        // by an external drag-n-drop library.
+	        after(this.end, prevEl);
+	        target = this.end;
+	      }
+	      frag.before(target);
 	    }
 	  },
 	
@@ -4763,7 +4859,7 @@
 	    var primitive = !isObject(value);
 	    var id;
 	    if (key || trackByKey || primitive) {
-	      id = trackByKey ? trackByKey === '$index' ? index : getPath(value, trackByKey) : key || value;
+	      id = getTrackByKey(index, key, value, trackByKey);
 	      if (!cache[id]) {
 	        cache[id] = frag;
 	      } else if (trackByKey !== '$index') {
@@ -4777,8 +4873,10 @@
 	        } else {
 	          process.env.NODE_ENV !== 'production' && this.warnDuplicate(value);
 	        }
-	      } else {
+	      } else if (Object.isExtensible(value)) {
 	        def(value, id, frag);
+	      } else if (process.env.NODE_ENV !== 'production') {
+	        warn('Frozen v-for objects cannot be automatically tracked, make sure to ' + 'provide a track-by key.');
 	      }
 	    }
 	    frag.raw = value;
@@ -4798,7 +4896,7 @@
 	    var primitive = !isObject(value);
 	    var frag;
 	    if (key || trackByKey || primitive) {
-	      var id = trackByKey ? trackByKey === '$index' ? index : getPath(value, trackByKey) : key || value;
+	      var id = getTrackByKey(index, key, value, trackByKey);
 	      frag = this.cache[id];
 	    } else {
 	      frag = value[this.id];
@@ -4825,7 +4923,7 @@
 	    var key = hasOwn(scope, '$key') && scope.$key;
 	    var primitive = !isObject(value);
 	    if (trackByKey || key || primitive) {
-	      var id = trackByKey ? trackByKey === '$index' ? index : getPath(value, trackByKey) : key || value;
+	      var id = getTrackByKey(index, key, value, trackByKey);
 	      this.cache[id] = null;
 	    } else {
 	      value[this.id] = null;
@@ -4866,7 +4964,7 @@
 	   * the filters. This is passed to and called by the watcher.
 	   *
 	   * It is necessary for this to be called during the
-	   * wathcer's dependency collection phase because we want
+	   * watcher's dependency collection phase because we want
 	   * the v-for to update when the source Object is mutated.
 	   */
 	
@@ -4973,6 +5071,19 @@
 	    ret[i] = i;
 	  }
 	  return ret;
+	}
+	
+	/**
+	 * Get the track by key for an item.
+	 *
+	 * @param {Number} index
+	 * @param {String} key
+	 * @param {*} value
+	 * @param {String} [trackByKey]
+	 */
+	
+	function getTrackByKey(index, key, value, trackByKey) {
+	  return trackByKey ? trackByKey === '$index' ? index : trackByKey.charAt(0).match(/\w/) ? getPath(value, trackByKey) : value[trackByKey] : key || value;
 	}
 	
 	if (process.env.NODE_ENV !== 'production') {
@@ -5196,7 +5307,10 @@
 	  },
 	
 	  update: function update(value) {
-	    this.el.value = _toString(value);
+	    // #3029 only update when the value changes. This prevent
+	    // browsers from overwriting values like selectionStart
+	    value = _toString(value);
+	    if (value !== this.el.value) this.el.value = value;
 	  },
 	
 	  unbind: function unbind() {
@@ -5245,6 +5359,8 @@
 	var select = {
 	
 	  bind: function bind() {
+	    var _this = this;
+	
 	    var self = this;
 	    var el = this.el;
 	
@@ -5276,7 +5392,12 @@
 	    // selectedIndex with value -1 to 0 when the element
 	    // is appended to a new parent, therefore we have to
 	    // force a DOM update whenever that happens...
-	    this.vm.$on('hook:attached', this.forceUpdate);
+	    this.vm.$on('hook:attached', function () {
+	      nextTick(_this.forceUpdate);
+	    });
+	    if (!inDoc(el)) {
+	      nextTick(this.forceUpdate);
+	    }
 	  },
 	
 	  update: function update(value) {
@@ -5576,7 +5697,7 @@
 	    }
 	    // key filter
 	    var keys = Object.keys(this.modifiers).filter(function (key) {
-	      return key !== 'stop' && key !== 'prevent' && key !== 'self';
+	      return key !== 'stop' && key !== 'prevent' && key !== 'self' && key !== 'capture';
 	    });
 	    if (keys.length) {
 	      handler = keyFilter(handler, keys);
@@ -5705,6 +5826,12 @@
 	  }
 	  var i = prefixes.length;
 	  var prefixed;
+	  if (camel !== 'filter' && camel in testEl.style) {
+	    return {
+	      kebab: prop,
+	      camel: camel
+	    };
+	  }
 	  while (i--) {
 	    prefixed = camelPrefixes[i] + upper;
 	    if (prefixed in testEl.style) {
@@ -5713,12 +5840,6 @@
 	        camel: prefixed
 	      };
 	    }
-	  }
-	  if (camel in testEl.style) {
-	    return {
-	      kebab: prop,
-	      camel: camel
-	    };
 	  }
 	}
 	
@@ -5808,8 +5929,12 @@
 	      attr = camelize(attr);
 	    }
 	    if (!interp && attrWithPropsRE.test(attr) && attr in el) {
-	      el[attr] = attr === 'value' ? value == null // IE9 will set input.value to "null" for null...
+	      var attrValue = attr === 'value' ? value == null // IE9 will set input.value to "null" for null...
 	      ? '' : value : value;
+	
+	      if (el[attr] !== attrValue) {
+	        el[attr] = attrValue;
+	      }
 	    }
 	    // set model props
 	    var modelProp = modelProps[attr];
@@ -5909,66 +6034,66 @@
 	  deep: true,
 	
 	  update: function update(value) {
-	    if (value && typeof value === 'string') {
-	      this.handleObject(stringToObject(value));
-	    } else if (isPlainObject(value)) {
-	      this.handleObject(value);
-	    } else if (isArray(value)) {
-	      this.handleArray(value);
-	    } else {
+	    if (!value) {
 	      this.cleanup();
+	    } else if (typeof value === 'string') {
+	      this.setClass(value.trim().split(/\s+/));
+	    } else {
+	      this.setClass(normalize$1(value));
 	    }
 	  },
 	
-	  handleObject: function handleObject(value) {
-	    this.cleanup(value);
-	    this.prevKeys = Object.keys(value);
-	    setObjectClasses(this.el, value);
-	  },
-	
-	  handleArray: function handleArray(value) {
+	  setClass: function setClass(value) {
 	    this.cleanup(value);
 	    for (var i = 0, l = value.length; i < l; i++) {
 	      var val = value[i];
-	      if (val && isPlainObject(val)) {
-	        setObjectClasses(this.el, val);
-	      } else if (val && typeof val === 'string') {
-	        addClass(this.el, val);
+	      if (val) {
+	        apply(this.el, val, addClass);
 	      }
 	    }
-	    this.prevKeys = value.slice();
+	    this.prevKeys = value;
 	  },
 	
 	  cleanup: function cleanup(value) {
-	    if (!this.prevKeys) return;
-	
-	    var i = this.prevKeys.length;
+	    var prevKeys = this.prevKeys;
+	    if (!prevKeys) return;
+	    var i = prevKeys.length;
 	    while (i--) {
-	      var key = this.prevKeys[i];
-	      if (!key) continue;
-	
-	      var keys = isPlainObject(key) ? Object.keys(key) : [key];
-	      for (var j = 0, l = keys.length; j < l; j++) {
-	        toggleClasses(this.el, keys[j], removeClass);
+	      var key = prevKeys[i];
+	      if (!value || value.indexOf(key) < 0) {
+	        apply(this.el, key, removeClass);
 	      }
 	    }
 	  }
 	};
 	
-	function setObjectClasses(el, obj) {
-	  var keys = Object.keys(obj);
-	  for (var i = 0, l = keys.length; i < l; i++) {
-	    var key = keys[i];
-	    if (!obj[key]) continue;
-	    toggleClasses(el, key, addClass);
-	  }
-	}
+	/**
+	 * Normalize objects and arrays (potentially containing objects)
+	 * into array of strings.
+	 *
+	 * @param {Object|Array<String|Object>} value
+	 * @return {Array<String>}
+	 */
 	
-	function stringToObject(value) {
-	  var res = {};
-	  var keys = value.trim().split(/\s+/);
-	  for (var i = 0, l = keys.length; i < l; i++) {
-	    res[keys[i]] = true;
+	function normalize$1(value) {
+	  var res = [];
+	  if (isArray(value)) {
+	    for (var i = 0, l = value.length; i < l; i++) {
+	      var _key = value[i];
+	      if (_key) {
+	        if (typeof _key === 'string') {
+	          res.push(_key);
+	        } else {
+	          for (var k in _key) {
+	            if (_key[k]) res.push(k);
+	          }
+	        }
+	      }
+	    }
+	  } else if (isObject(value)) {
+	    for (var key in value) {
+	      if (value[key]) res.push(key);
+	    }
 	  }
 	  return res;
 	}
@@ -5984,14 +6109,12 @@
 	 * @param {Function} fn
 	 */
 	
-	function toggleClasses(el, key, fn) {
+	function apply(el, key, fn) {
 	  key = key.trim();
-	
 	  if (key.indexOf(' ') === -1) {
 	    fn(el, key);
 	    return;
 	  }
-	
 	  // The key contains one or more space characters.
 	  // Since a class name doesn't accept such characters, we
 	  // treat it as multiple classes.
@@ -6042,6 +6165,7 @@
 	      // cached, when the component is used elsewhere this attribute
 	      // will remain at link time.
 	      this.el.removeAttribute('is');
+	      this.el.removeAttribute(':is');
 	      // remove ref, same as above
 	      if (this.descriptor.ref) {
 	        this.el.removeAttribute('v-ref:' + hyphenate(this.descriptor.ref));
@@ -6476,6 +6600,7 @@
 	  return function propsLinkFn(vm, scope) {
 	    // store resolved props info
 	    vm._props = {};
+	    var inlineProps = vm.$options.propsData;
 	    var i = props.length;
 	    var prop, path, options, value, raw;
 	    while (i--) {
@@ -6484,7 +6609,9 @@
 	      path = prop.path;
 	      options = prop.options;
 	      vm._props[path] = prop;
-	      if (raw === null) {
+	      if (inlineProps && hasOwn(inlineProps, path)) {
+	        initProp(vm, prop, inlineProps[path]);
+	      }if (raw === null) {
 	        // initialize absent prop
 	        initProp(vm, prop, undefined);
 	      } else if (prop.dynamic) {
@@ -6540,7 +6667,7 @@
 	  if (value === undefined) {
 	    value = getPropDefaultValue(vm, prop);
 	  }
-	  value = coerceProp(prop, value);
+	  value = coerceProp(prop, value, vm);
 	  var coerced = value !== rawValue;
 	  if (!assertProp(prop, value, vm)) {
 	    value = undefined;
@@ -6659,13 +6786,17 @@
 	 * @return {*}
 	 */
 	
-	function coerceProp(prop, value) {
+	function coerceProp(prop, value, vm) {
 	  var coerce = prop.options.coerce;
 	  if (!coerce) {
 	    return value;
 	  }
-	  // coerce is a function
-	  return coerce(value);
+	  if (typeof coerce === 'function') {
+	    return coerce(value);
+	  } else {
+	    process.env.NODE_ENV !== 'production' && warn('Invalid coerce for prop "' + prop.name + '": expected function, got ' + typeof coerce + '.', vm);
+	    return value;
+	  }
 	}
 	
 	/**
@@ -7197,10 +7328,9 @@
 	    // resolve on owner vm
 	    var hooks = resolveAsset(this.vm.$options, 'transitions', id);
 	    id = id || 'v';
+	    oldId = oldId || 'v';
 	    el.__v_trans = new Transition(el, id, hooks, this.vm);
-	    if (oldId) {
-	      removeClass(el, oldId + '-transition');
-	    }
+	    removeClass(el, oldId + '-transition');
 	    addClass(el, id + '-transition');
 	  }
 	};
@@ -7245,7 +7375,7 @@
 	  // link function for the node itself.
 	  var nodeLinkFn = partial || !options._asComponent ? compileNode(el, options) : null;
 	  // link function for the childNodes
-	  var childLinkFn = !(nodeLinkFn && nodeLinkFn.terminal) && el.tagName !== 'SCRIPT' && el.hasChildNodes() ? compileNodeList(el.childNodes, options) : null;
+	  var childLinkFn = !(nodeLinkFn && nodeLinkFn.terminal) && !isScript(el) && el.hasChildNodes() ? compileNodeList(el.childNodes, options) : null;
 	
 	  /**
 	   * A composite linker function to be called on a already
@@ -7428,7 +7558,7 @@
 	    });
 	    if (names.length) {
 	      var plural = names.length > 1;
-	      warn('Attribute' + (plural ? 's ' : ' ') + names.join(', ') + (plural ? ' are' : ' is') + ' ignored on component ' + '<' + options.el.tagName.toLowerCase() + '> because ' + 'the component is a fragment instance: ' + 'http://vuejs.org/guide/components.html#Fragment_Instance');
+	      warn('Attribute' + (plural ? 's ' : ' ') + names.join(', ') + (plural ? ' are' : ' is') + ' ignored on component ' + '<' + options.el.tagName.toLowerCase() + '> because ' + 'the component is a fragment instance: ' + 'http://vuejs.org/guide/components.html#Fragment-Instance');
 	    }
 	  }
 	
@@ -7465,7 +7595,7 @@
 	
 	function compileNode(node, options) {
 	  var type = node.nodeType;
-	  if (type === 1 && node.tagName !== 'SCRIPT') {
+	  if (type === 1 && !isScript(node)) {
 	    return compileElement(node, options);
 	  } else if (type === 3 && node.data.trim()) {
 	    return compileTextNode(node, options);
@@ -7625,7 +7755,7 @@
 	          if (token.html) {
 	            replace(node, parseTemplate(value, true));
 	          } else {
-	            node.data = value;
+	            node.data = _toString(value);
 	          }
 	        } else {
 	          vm._bindDir(token.descriptor, node, host, scope);
@@ -7760,7 +7890,6 @@
 	  var attr, name, value, modifiers, matched, dirName, rawName, arg, def, termDef;
 	  for (var i = 0, j = attrs.length; i < j; i++) {
 	    attr = attrs[i];
-	    modifiers = parseModifiers(attr.name);
 	    name = attr.name.replace(modifierRE, '');
 	    if (matched = name.match(dirAttrRE)) {
 	      def = resolveAsset(options, 'directives', matched[1]);
@@ -7768,6 +7897,7 @@
 	        if (!termDef || (def.priority || DEFAULT_TERMINAL_PRIORITY) > termDef.priority) {
 	          termDef = def;
 	          rawName = attr.name;
+	          modifiers = parseModifiers(attr.name);
 	          value = attr.value;
 	          dirName = matched[1];
 	          arg = matched[2];
@@ -7988,6 +8118,10 @@
 	  }
 	}
 	
+	function isScript(el) {
+	  return el.tagName === 'SCRIPT' && (!el.hasAttribute('type') || el.getAttribute('type') === 'text/javascript');
+	}
+	
 	var specialCharRE = /[^\w\-:\.]/;
 	
 	/**
@@ -8117,8 +8251,8 @@
 	    value = attrs[i].value;
 	    if (!to.hasAttribute(name) && !specialCharRE.test(name)) {
 	      to.setAttribute(name, value);
-	    } else if (name === 'class' && !parseText(value)) {
-	      value.trim().split(/\s+/).forEach(function (cls) {
+	    } else if (name === 'class' && !parseText(value) && (value = value.trim())) {
+	      value.split(/\s+/).forEach(function (cls) {
 	        addClass(to, cls);
 	      });
 	    }
@@ -8157,6 +8291,10 @@
 	    contents[name] = extractFragment(contents[name], content);
 	  }
 	  if (content.hasChildNodes()) {
+	    var nodes = content.childNodes;
+	    if (nodes.length === 1 && nodes[0].nodeType === 3 && !nodes[0].data.trim()) {
+	      return;
+	    }
 	    contents['default'] = extractFragment(content.childNodes, content);
 	  }
 	}
@@ -8175,7 +8313,7 @@
 	    var node = nodes[i];
 	    if (isTemplate(node) && !node.hasAttribute('v-if') && !node.hasAttribute('v-for')) {
 	      parent.removeChild(node);
-	      node = parseTemplate(node);
+	      node = parseTemplate(node, true);
 	    }
 	    frag.appendChild(node);
 	  }
@@ -8256,7 +8394,6 @@
 	      process.env.NODE_ENV !== 'production' && warn('data functions should return an object.', this);
 	    }
 	    var props = this._props;
-	    var runtimeData = this._runtimeData ? typeof this._runtimeData === 'function' ? this._runtimeData() : this._runtimeData : null;
 	    // proxy data on instance
 	    var keys = Object.keys(data);
 	    var i, key;
@@ -8267,10 +8404,10 @@
 	      // 1. it's not already defined as a prop
 	      // 2. it's provided via a instantiation option AND there are no
 	      //    template prop present
-	      if (!props || !hasOwn(props, key) || runtimeData && hasOwn(runtimeData, key) && props[key].raw === null) {
+	      if (!props || !hasOwn(props, key)) {
 	        this._proxy(key);
 	      } else if (process.env.NODE_ENV !== 'production') {
-	        warn('Data field "' + key + '" is already defined ' + 'as a prop. Use prop default value instead.', this);
+	        warn('Data field "' + key + '" is already defined ' + 'as a prop. To provide default value for a prop, use the "default" ' + 'prop option; if you want to pass prop values to an instantiation ' + 'call, use the "propsData" option.', this);
 	      }
 	    }
 	    // observe data
@@ -8460,18 +8597,21 @@
 	
 	  function registerComponentEvents(vm, el) {
 	    var attrs = el.attributes;
-	    var name, handler;
+	    var name, value, handler;
 	    for (var i = 0, l = attrs.length; i < l; i++) {
 	      name = attrs[i].name;
 	      if (eventRE.test(name)) {
 	        name = name.replace(eventRE, '');
-	        handler = (vm._scope || vm._context).$eval(attrs[i].value, true);
-	        if (typeof handler === 'function') {
-	          handler._fromParent = true;
-	          vm.$on(name.replace(eventRE), handler);
-	        } else if (process.env.NODE_ENV !== 'production') {
-	          warn('v-on:' + name + '="' + attrs[i].value + '" ' + 'expects a function value, got ' + handler, vm);
+	        // force the expression into a statement so that
+	        // it always dynamically resolves the method to call (#2670)
+	        // kinda ugly hack, but does the job.
+	        value = attrs[i].value;
+	        if (isSimplePath(value)) {
+	          value += '.apply(this, $arguments)';
 	        }
+	        handler = (vm._scope || vm._context).$eval(value, true);
+	        handler._fromParent = true;
+	        vm.$on(name.replace(eventRE), handler);
 	      }
 	    }
 	  }
@@ -8599,7 +8739,7 @@
 	  };
 	}
 	
-	function noop() {}
+	function noop$1() {}
 	
 	/**
 	 * A directive links a DOM element with a piece of data,
@@ -8698,7 +8838,7 @@
 	        }
 	      };
 	    } else {
-	      this._update = noop;
+	      this._update = noop$1;
 	    }
 	    var preProcess = this._preProcess ? bind(this._preProcess, this) : null;
 	    var postProcess = this._postProcess ? bind(this._postProcess, this) : null;
@@ -9122,7 +9262,7 @@
 	    }
 	    // remove reference from data ob
 	    // frozen object may not have observer.
-	    if (this._data.__ob__) {
+	    if (this._data && this._data.__ob__) {
 	      this._data.__ob__.removeVm(this);
 	    }
 	    // Clean up references to private properties and other
@@ -9195,6 +9335,7 @@
 	    } else {
 	      factory = resolveAsset(this.$options, 'components', value, true);
 	    }
+	    /* istanbul ignore if */
 	    if (!factory) {
 	      return;
 	    }
@@ -9244,7 +9385,7 @@
 	  Vue.prototype.$get = function (exp, asStatement) {
 	    var res = parseExpression(exp);
 	    if (res) {
-	      if (asStatement && !isSimplePath(exp)) {
+	      if (asStatement) {
 	        var self = this;
 	        return function statementHandler() {
 	          self.$arguments = toArray(arguments);
@@ -10135,7 +10276,7 @@
 	
 	  json: {
 	    read: function read(value, indent) {
-	      return typeof value === 'string' ? value : JSON.stringify(value, null, Number(indent) || 2);
+	      return typeof value === 'string' ? value : JSON.stringify(value, null, arguments.length > 1 ? indent : 2);
 	    },
 	    write: function write(value) {
 	      try {
@@ -10176,17 +10317,19 @@
 	   * 12345 => $12,345.00
 	   *
 	   * @param {String} sign
+	   * @param {Number} decimals Decimal places
 	   */
 	
-	  currency: function currency(value, _currency) {
+	  currency: function currency(value, _currency, decimals) {
 	    value = parseFloat(value);
 	    if (!isFinite(value) || !value && value !== 0) return '';
 	    _currency = _currency != null ? _currency : '$';
-	    var stringified = Math.abs(value).toFixed(2);
-	    var _int = stringified.slice(0, -3);
+	    decimals = decimals != null ? decimals : 2;
+	    var stringified = Math.abs(value).toFixed(decimals);
+	    var _int = decimals ? stringified.slice(0, -1 - decimals) : stringified;
 	    var i = _int.length % 3;
 	    var head = i > 0 ? _int.slice(0, i) + (_int.length > 3 ? ',' : '') : '';
-	    var _float = stringified.slice(-3);
+	    var _float = decimals ? stringified.slice(-1 - decimals) : '';
 	    var sign = value < 0 ? '-' : '';
 	    return sign + _currency + head + _int.slice(i).replace(digitsRE, '$1,') + _float;
 	  },
@@ -10206,7 +10349,13 @@
 	
 	  pluralize: function pluralize(value) {
 	    var args = toArray(arguments, 1);
-	    return args.length > 1 ? args[value % 10 - 1] || args[args.length - 1] : args[0] + (value === 1 ? '' : 's');
+	    var length = args.length;
+	    if (length > 1) {
+	      var index = value % 10 - 1;
+	      return index in args ? args[index] : args[length - 1];
+	    } else {
+	      return args[0] + (value === 1 ? '' : 's');
+	    }
 	  },
 	
 	  /**
@@ -10391,7 +10540,9 @@
 	          }
 	        }
 	        if (type === 'component' && isPlainObject(definition)) {
-	          definition.name = id;
+	          if (!definition.name) {
+	            definition.name = id;
+	          }
 	          definition = Vue.extend(definition);
 	        }
 	        this.options[type + 's'][id] = definition;
@@ -10406,7 +10557,7 @@
 	
 	installGlobalAPI(Vue);
 	
-	Vue.version = '1.0.21';
+	Vue.version = '1.0.26';
 	
 	// devtools global hook
 	/* istanbul ignore next */
@@ -10428,14 +10579,55 @@
 /***/ function(module, exports) {
 
 	// shim for using process in browser
-	
 	var process = module.exports = {};
+	
+	// cached from whatever global is present so that test runners that stub it
+	// don't break things.  But we need to wrap it in a try catch in case it is
+	// wrapped in strict mode code which doesn't define any globals.  It's inside a
+	// function because try/catches deoptimize in certain engines.
+	
+	var cachedSetTimeout;
+	var cachedClearTimeout;
+	
+	(function () {
+	    try {
+	        cachedSetTimeout = setTimeout;
+	    } catch (e) {
+	        cachedSetTimeout = function () {
+	            throw new Error('setTimeout is not defined');
+	        }
+	    }
+	    try {
+	        cachedClearTimeout = clearTimeout;
+	    } catch (e) {
+	        cachedClearTimeout = function () {
+	            throw new Error('clearTimeout is not defined');
+	        }
+	    }
+	} ())
+	function runTimeout(fun) {
+	    if (cachedSetTimeout === setTimeout) {
+	        return setTimeout(fun, 0);
+	    } else {
+	        return cachedSetTimeout.call(null, fun, 0);
+	    }
+	}
+	function runClearTimeout(marker) {
+	    if (cachedClearTimeout === clearTimeout) {
+	        clearTimeout(marker);
+	    } else {
+	        cachedClearTimeout.call(null, marker);
+	    }
+	}
 	var queue = [];
 	var draining = false;
 	var currentQueue;
 	var queueIndex = -1;
 	
 	function cleanUpNextTick() {
+	    if (!draining || !currentQueue) {
+	        return;
+	    }
 	    draining = false;
 	    if (currentQueue.length) {
 	        queue = currentQueue.concat(queue);
@@ -10451,7 +10643,7 @@
 	    if (draining) {
 	        return;
 	    }
-	    var timeout = setTimeout(cleanUpNextTick);
+	    var timeout = runTimeout(cleanUpNextTick);
 	    draining = true;
 	
 	    var len = queue.length;
@@ -10468,7 +10660,7 @@
 	    }
 	    currentQueue = null;
 	    draining = false;
-	    clearTimeout(timeout);
+	    runClearTimeout(timeout);
 	}
 	
 	process.nextTick = function (fun) {
@@ -10480,7 +10672,7 @@
 	    }
 	    queue.push(new Item(fun, args));
 	    if (queue.length === 1 && !draining) {
-	        setTimeout(drainQueue, 0);
+	        runTimeout(drainQueue);
 	    }
 	};
 	
@@ -10529,7 +10721,7 @@
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] demo\\app.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] demo/app.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(31)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -10538,9 +10730,9 @@
 	}
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), true)
+	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "C:\\Users\\Administrator\\Desktop\\vue-calendar\\demo\\app.vue"
+	  var id = "_v-f7dbbb42/app.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -10611,7 +10803,7 @@
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\components\\calendar.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src/components/calendar.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(30)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -10620,9 +10812,9 @@
 	}
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), true)
+	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "C:\\Users\\Administrator\\Desktop\\vue-calendar\\src\\components\\calendar.vue"
+	  var id = "_v-159e5972/calendar.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -10665,7 +10857,7 @@
 	
 	
 	// module
-	exports.push([module.id, ".calendar-wrapper {\r\n\tdisplay: -webkit-flex;\r\n\tdisplay: -ms-flexbox;\r\n\tdisplay: -webkit-box;\r\n\tdisplay: flex;\r\n\twidth: 100%;\r\n\theight: 100%;\r\n\tposition: fixed;\r\n\ttop: 0;\r\n\tleft: 0;\r\n\t-webkit-transition: opacity .3s;\r\n\ttransition: opacity .3s;\r\n}\r\n.calendar-enter .calendar-container, .calendar-leave .calendar-container {\r\n\t-webkit-transform: scale(1.1);\r\n\t        transform: scale(1.1);\r\n}\r\n.calendar-mask {\r\n\twidth: 100%;\r\n\theight: 100%;\r\n\tposition: absolute;\r\n\ttop: 0;\r\n\tz-index: -1;\r\n\tbackground-color: rgba(0, 0, 0, .4);\r\n}\r\n.calendar-enter, .calendar-leave {\r\n\topacity: 0;\r\n}\r\n.calendar-container {\r\n\twidth: 320px;\r\n\t/* min-height: 500px; */\r\n\t/* margin: auto; */\r\n\tmargin-left: -160px;\r\n\tposition: absolute;\r\n\tleft: 50%;\r\n\tbox-shadow: 0 14px 45px rgba(0, 0, 0, .25), 0 10px 18px rgba(0, 0, 0, .22);\r\n\tbackground-color: #FFF;\r\n\t-webkit-user-select: none;\r\n\t   -moz-user-select: none;\r\n\t    -ms-user-select: none;\r\n\t        user-select: none;\r\n\ttransition: -webkit-transform .3s;\r\n\t-webkit-transition: -webkit-transform .3s;\r\n\ttransition: transform .3s;\r\n\ttransition: transform .3s, -webkit-transform .3s;\r\n}\r\n\r\n.calendar-header {\r\n\theight: 72px;\r\n\tpadding: 20px;\r\n\tcolor: rgba(255, 255, 255, 0.7);\r\n\tbackground-color: #0884CE\r\n}\r\n\r\n.calendar-header p {\r\n\tcursor: pointer;\r\n}\r\n\r\n.calendar-header h2 {\r\n\tmargin-top: 10px;\r\n\tfont-size: 36px;\r\n\tcursor: pointer;\r\n}\r\n\r\n.calendar-header .active {\r\n\tcolor: #FFF;\r\n}\r\n\r\n.calendar-header .up {\r\n\t-webkit-animation: up .3s;\r\n\t        animation: up .3s;\r\n}\r\n\r\n.calendar-header .down {\r\n\t-webkit-animation: down .3s;\r\n\t        animation: down .3s;\r\n}\r\n\r\n@-webkit-keyframes up {\r\n\t0% {\r\n\t\t-webkit-transform: translateY(-20px);\r\n\t\t        transform: translateY(-20px);\r\n\t}\r\n\t100% {\r\n\t\t-webkit-transform: translateY(0);\r\n\t\t        transform: translateY(0);\r\n\t}\r\n}\r\n\r\n@keyframes up {\r\n\t0% {\r\n\t\t-webkit-transform: translateY(-20px);\r\n\t\t        transform: translateY(-20px);\r\n\t}\r\n\t100% {\r\n\t\t-webkit-transform: translateY(0);\r\n\t\t        transform: translateY(0);\r\n\t}\r\n}\r\n@-webkit-keyframes down {\r\n\t0% {\r\n\t\t-webkit-transform: translateY(20px);\r\n\t\t        transform: translateY(20px);\r\n\t}\r\n\t100% {\r\n\t\t-webkit-transform: translateY(0);\r\n\t\t        transform: translateY(0);\r\n\t}\r\n}\r\n@keyframes down {\r\n\t0% {\r\n\t\t-webkit-transform: translateY(20px);\r\n\t\t        transform: translateY(20px);\r\n\t}\r\n\t100% {\r\n\t\t-webkit-transform: translateY(0);\r\n\t\t        transform: translateY(0);\r\n\t}\r\n}\r\n\r\n.select-month {\r\n\tdisplay: -webkit-flex;\r\n\tdisplay: -ms-flexbox;\r\n\tdisplay: -webkit-box;\r\n\tdisplay: flex;\r\n\t-webkit-justify-content: space-between;\r\n\t    -ms-flex-pack: justify;\r\n\t        -webkit-box-pack: justify;\r\n\t        justify-content: space-between;\r\n\t-webkit-align-items: center;\r\n\t    -ms-flex-align: center;\r\n\t        -webkit-box-align: center;\r\n\t        align-items: center;\r\n\tpadding: 0 25px;\r\n\tmargin: 15px 0;\r\n\ttext-align: center;\r\n}\r\n.arrow {\r\n\twidth: 8px;\r\n\theight: 8px;\r\n\tpadding: 3px;\r\n\tcursor: pointer;\r\n\tborder: 1px solid #4E647B;\r\n\tborder-right: none;\r\n\tborder-bottom: none;\r\n\t-webkit-transform: rotate(-45deg);\r\n\t        transform: rotate(-45deg);\r\n}\r\n.arrow:nth-of-type(2) {\r\n\t-webkit-transform: rotate(135deg);\r\n\t        transform: rotate(135deg);\r\n}\r\n\r\n.select-date {\r\n\twidth: 300px;\r\n\tmargin: 0 auto;\r\n}\r\n.week-header {\r\n\tdisplay: -webkit-flex;\r\n\tdisplay: -ms-flexbox;\r\n\tdisplay: -webkit-box;\r\n\tdisplay: flex;\r\n\t-webkit-justify-content: space-around;\r\n\t    -ms-flex-pack: distribute;\r\n\t        justify-content: space-around;\r\n\tpadding: 10px 0;\r\n\tcolor: #A5A5A5;\r\n\tfont-size: 12px;\r\n}\r\n.select-date tbody {\r\n\tmargin-top: 10px;\r\n\ttext-align: right\r\n}\r\n.select-date tbody tr {\r\n\tdisplay: -webkit-flex;\r\n\tdisplay: -ms-flexbox;\r\n\tdisplay: -webkit-box;\r\n\tdisplay: flex;\r\n\t-webkit-justify-content: space-around;\r\n\t    -ms-flex-pack: distribute;\r\n\t        justify-content: space-around;\r\n}\r\n.select-date tbody tr td {\r\n\twidth: 36px;\r\n\tmargin: 2px 0;\r\n\tcolor: #4E647B;\r\n\ttext-align: center;\r\n\tline-height: 36px;\r\n\tcursor: pointer;\r\n}\r\n.select-date tbody tr .today {\r\n\tcolor: #0884CE;\r\n\tfont-weight: bold;\r\n}\r\n.select-date tbody tr .selected {\r\n\tcolor: #FFF;\r\n\tborder-radius: 100%;\r\n\tbackground-color: #0884CE;\r\n}\r\n.select-date tbody tr .not {\r\n\topacity: 0;\r\n\tcursor: default;\r\n}\r\n.select-date tbody tr td:hover {\r\n\tposition: relative;\r\n\tz-index: 1;\r\n\tcolor: #FFF;\r\n}\r\n.select-date tbody tr td:hover::after {\r\n\tcontent: \"\";\r\n\twidth: 36px;\r\n\theight: 36px;\r\n\tposition: absolute;\r\n\ttop: 0;\r\n\tleft: 0;\r\n\tz-index: -1;\r\n\tborder-radius: 100%;\r\n\tbackground-color: rgba(8, 132, 206, 0.7);\r\n\t-webkit-animation: scale .3s;\r\n\t        animation: scale .3s;\r\n}\r\n@-webkit-keyframes scale {\r\n\t0% {\r\n\t\t-webkit-transform: scale(0.2);\r\n\t\t        transform: scale(0.2);\r\n\t}\r\n\t100% {\r\n\t\t-webkit-transform: scale(1);\r\n\t\t        transform: scale(1);\r\n\t}\r\n}\r\n@keyframes scale {\r\n\t0% {\r\n\t\t-webkit-transform: scale(0.2);\r\n\t\t        transform: scale(0.2);\r\n\t}\r\n\t100% {\r\n\t\t-webkit-transform: scale(1);\r\n\t\t        transform: scale(1);\r\n\t}\r\n}\r\n\r\n.select-year {\r\n\theight: 300px;\r\n\toverflow: hidden;\r\n\toverflow-y: scroll\r\n}\r\n\r\n.select-year li {\r\n\tfont-size: 18px;\r\n\tline-height: 40px;\r\n\tcursor: pointer;\r\n\ttext-align: center;\r\n}\r\n\r\n.select-year li.active {\r\n\t/* margin: 5px 0; */\r\n\tcolor: #0884CE;\r\n\tfont-size: 22px;\r\n\tfont-weight: 800;\r\n}\r\n.select-year::-webkit-scrollbar {\r\n\tdisplay: none;\r\n}\r\n\r\n.calendar-footer {\r\n\tpadding: 15px 10px 10px;\r\n\ttext-align: right\r\n}\r\n\r\n.calendar-footer button {\r\n\tpadding: 8px 20px;\r\n\tcolor: #0884CE;\r\n\tcursor: pointer;\r\n\tline-height: 1.714;\r\n\tborder: none;\r\n\tbackground-color: transparent;\r\n}\r\n\r\n.calendar-footer button:hover {\r\n\tcolor: #FFF;\r\n\t-webkit-animation: fade-in .5s ease both;\r\n\t        animation: fade-in .5s ease both;\r\n}\r\n\r\n@-webkit-keyframes fade-in {\r\n\t0% {\r\n\t\tbackground-color: rgba(9, 148, 231, .1);\r\n\t}\r\n\t100% {\r\n\t\tbackground-color: rgba(9, 148, 231, .5);\r\n\t}\r\n}\r\n\r\n@keyframes fade-in {\r\n\t0% {\r\n\t\tbackground-color: rgba(9, 148, 231, .1);\r\n\t}\r\n\t100% {\r\n\t\tbackground-color: rgba(9, 148, 231, .5);\r\n\t}\r\n}", "", {"version":3,"sources":["/./src/css/calendar.css"],"names":[],"mappings":"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","file":"calendar.css","sourcesContent":[".calendar-wrapper {\r\n\tdisplay: flex;\r\n\twidth: 100%;\r\n\theight: 100%;\r\n\tposition: fixed;\r\n\ttop: 0;\r\n\tleft: 0;\r\n\ttransition: opacity .3s;\r\n}\r\n.calendar-enter .calendar-container, .calendar-leave .calendar-container {\r\n\ttransform: scale(1.1);\r\n}\r\n.calendar-mask {\r\n\twidth: 100%;\r\n\theight: 100%;\r\n\tposition: absolute;\r\n\ttop: 0;\r\n\tz-index: -1;\r\n\tbackground-color: rgba(0, 0, 0, .4);\r\n}\r\n.calendar-enter, .calendar-leave {\r\n\topacity: 0;\r\n}\r\n.calendar-container {\r\n\twidth: 320px;\r\n\t/* min-height: 500px; */\r\n\t/* margin: auto; */\r\n\tmargin-left: -160px;\r\n\tposition: absolute;\r\n\tleft: 50%;\r\n\tbox-shadow: 0 14px 45px rgba(0, 0, 0, .25), 0 10px 18px rgba(0, 0, 0, .22);\r\n\tbackground-color: #FFF;\r\n\tuser-select: none;\r\n\ttransition: transform .3s;\r\n}\r\n\r\n.calendar-header {\r\n\theight: 72px;\r\n\tpadding: 20px;\r\n\tcolor: rgba(255, 255, 255, 0.7);\r\n\tbackground-color: #0884CE;\r\n\r\n\t& p {\r\n\t\tcursor: pointer;\r\n\t}\r\n\r\n\t& h2 {\r\n\t\tmargin-top: 10px;\r\n\t\tfont-size: 36px;\r\n\t\tcursor: pointer;\r\n\t}\r\n\r\n\t& .active {\r\n\t\tcolor: #FFF;\r\n\t}\r\n\r\n\t& .up {\r\n\t\tanimation: up .3s;\r\n\t}\r\n\r\n\t& .down {\r\n\t\tanimation: down .3s;\r\n\t}\r\n}\r\n\r\n@keyframes up {\r\n\t0% {\r\n\t\ttransform: translateY(-20px);\r\n\t}\r\n\t100% {\r\n\t\ttransform: translateY(0);\r\n\t}\r\n}\r\n@keyframes down {\r\n\t0% {\r\n\t\ttransform: translateY(20px);\r\n\t}\r\n\t100% {\r\n\t\ttransform: translateY(0);\r\n\t}\r\n}\r\n\r\n.select-month {\r\n\tdisplay: flex;\r\n\tjustify-content: space-between;\r\n\talign-items: center;\r\n\tpadding: 0 25px;\r\n\tmargin: 15px 0;\r\n\ttext-align: center;\r\n}\r\n.arrow {\r\n\twidth: 8px;\r\n\theight: 8px;\r\n\tpadding: 3px;\r\n\tcursor: pointer;\r\n\tborder: 1px solid #4E647B;\r\n\tborder-right: none;\r\n\tborder-bottom: none;\r\n\ttransform: rotate(-45deg);\r\n}\r\n.arrow:nth-of-type(2) {\r\n\ttransform: rotate(135deg);\r\n}\r\n\r\n.select-date {\r\n\twidth: 300px;\r\n\tmargin: 0 auto;\r\n}\r\n.week-header {\r\n\tdisplay: flex;\r\n\tjustify-content: space-around;\r\n\tpadding: 10px 0;\r\n\tcolor: #A5A5A5;\r\n\tfont-size: 12px;\r\n}\r\n.select-date tbody {\r\n\tmargin-top: 10px;\r\n\ttext-align: right;\r\n\r\n\t& tr {\r\n\t\tdisplay: flex;\r\n\t\tjustify-content: space-around;\r\n\r\n\t\t& td {\r\n\t\t\twidth: 36px;\r\n\t\t\tmargin: 2px 0;\r\n\t\t\tcolor: #4E647B;\r\n\t\t\ttext-align: center;\r\n\t\t\tline-height: 36px;\r\n\t\t\tcursor: pointer;\r\n\t\t}\r\n\r\n\t\t& .today {\r\n\t\t\tcolor: #0884CE;\r\n\t\t\tfont-weight: bold;\r\n\t\t}\r\n\r\n\t\t& .selected {\r\n\t\t\tcolor: #FFF;\r\n\t\t\tborder-radius: 100%;\r\n\t\t\tbackground-color: #0884CE;\r\n\t\t}\r\n\r\n\t\t& .not {\r\n\t\t\topacity: 0;\r\n\t\t\tcursor: default;\r\n\t\t}\r\n\r\n\t\t& td:hover {\r\n\t\t\tposition: relative;\r\n\t\t\tz-index: 1;\r\n\t\t\tcolor: #FFF;\r\n\r\n\t\t\t&::after {\r\n\t\t\t\tcontent: \"\";\r\n\t\t\t\twidth: 36px;\r\n\t\t\t\theight: 36px;\r\n\t\t\t\tposition: absolute;\r\n\t\t\t\ttop: 0;\r\n\t\t\t\tleft: 0;\r\n\t\t\t\tz-index: -1;\r\n\t\t\t\tborder-radius: 100%;\r\n\t\t\t\tbackground-color: rgba(8, 132, 206, 0.7);\r\n\t\t\t\tanimation: scale .3s;\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}\r\n@keyframes scale {\r\n\t0% {\r\n\t\ttransform: scale(0.2);\r\n\t}\r\n\t100% {\r\n\t\ttransform: scale(1);\r\n\t}\r\n}\r\n\r\n.select-year {\r\n\theight: 300px;\r\n\toverflow: hidden;\r\n\toverflow-y: scroll;\r\n\r\n\t& li {\r\n\t\tfont-size: 18px;\r\n\t\tline-height: 40px;\r\n\t\tcursor: pointer;\r\n\t\ttext-align: center;\r\n\t}\r\n\r\n\t& li.active {\r\n\t\t/* margin: 5px 0; */\r\n\t\tcolor: #0884CE;\r\n\t\tfont-size: 22px;\r\n\t\tfont-weight: 800;\r\n\t}\r\n}\r\n.select-year::-webkit-scrollbar {\r\n\tdisplay: none;\r\n}\r\n\r\n.calendar-footer {\r\n\tpadding: 15px 10px 10px;\r\n\ttext-align: right;\r\n\r\n\t& button {\r\n\t\tpadding: 8px 20px;\r\n\t\tcolor: #0884CE;\r\n\t\tcursor: pointer;\r\n\t\tline-height: 1.714;\r\n\t\tborder: none;\r\n\t\tbackground-color: transparent;\r\n\t}\r\n\r\n\t& button:hover {\r\n\t\tcolor: #FFF;\r\n\t\tanimation: fade-in .5s ease both;\r\n\t}\r\n}\r\n\r\n@keyframes fade-in {\r\n\t0% {\r\n\t\tbackground-color: rgba(9, 148, 231, .1);\r\n\t}\r\n\t100% {\r\n\t\tbackground-color: rgba(9, 148, 231, .5);\r\n\t}\r\n}"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, ".calendar-wrapper {\n\tdisplay: -ms-flexbox;\n\tdisplay: -webkit-box;\n\tdisplay: flex;\n\twidth: 100%;\n\theight: 100%;\n\tposition: fixed;\n\ttop: 0;\n\tleft: 0;\n\t-webkit-transition: opacity .3s;\n\ttransition: opacity .3s;\n}\n.calendar-enter .calendar-container, .calendar-leave .calendar-container {\n\t-webkit-transform: scale(1.1);\n\t        transform: scale(1.1);\n}\n.calendar-mask {\n\twidth: 100%;\n\theight: 100%;\n\tposition: absolute;\n\ttop: 0;\n\tz-index: -1;\n\tbackground-color: rgba(0, 0, 0, .4);\n}\n.calendar-enter, .calendar-leave {\n\topacity: 0;\n}\n.calendar-container {\n\twidth: 320px;\n\t/* min-height: 500px; */\n\t/* margin: auto; */\n\tmargin-left: -160px;\n\tposition: absolute;\n\tleft: 50%;\n\tbox-shadow: 0 14px 45px rgba(0, 0, 0, .25), 0 10px 18px rgba(0, 0, 0, .22);\n\tbackground-color: #FFF;\n\t-webkit-user-select: none;\n\t   -moz-user-select: none;\n\t    -ms-user-select: none;\n\t        user-select: none;\n\t-webkit-transition: -webkit-transform .3s;\n\ttransition: -webkit-transform .3s;\n\ttransition: transform .3s;\n\ttransition: transform .3s, -webkit-transform .3s;\n}\n\n.calendar-header {\n\theight: 72px;\n\tpadding: 20px;\n\tcolor: rgba(255, 255, 255, 0.7);\n\tbackground-color: #0884CE\n}\n\n.calendar-header p {\n\tcursor: pointer;\n}\n\n.calendar-header h2 {\n\tmargin-top: 10px;\n\tfont-size: 36px;\n\tcursor: pointer;\n}\n\n.calendar-header .active {\n\tcolor: #FFF;\n}\n\n.calendar-header .up {\n\t-webkit-animation: up .3s;\n\t        animation: up .3s;\n}\n\n.calendar-header .down {\n\t-webkit-animation: down .3s;\n\t        animation: down .3s;\n}\n\n@-webkit-keyframes up {\n\t0% {\n\t\t-webkit-transform: translateY(-20px);\n\t\t        transform: translateY(-20px);\n\t}\n\t100% {\n\t\t-webkit-transform: translateY(0);\n\t\t        transform: translateY(0);\n\t}\n}\n\n@keyframes up {\n\t0% {\n\t\t-webkit-transform: translateY(-20px);\n\t\t        transform: translateY(-20px);\n\t}\n\t100% {\n\t\t-webkit-transform: translateY(0);\n\t\t        transform: translateY(0);\n\t}\n}\n@-webkit-keyframes down {\n\t0% {\n\t\t-webkit-transform: translateY(20px);\n\t\t        transform: translateY(20px);\n\t}\n\t100% {\n\t\t-webkit-transform: translateY(0);\n\t\t        transform: translateY(0);\n\t}\n}\n@keyframes down {\n\t0% {\n\t\t-webkit-transform: translateY(20px);\n\t\t        transform: translateY(20px);\n\t}\n\t100% {\n\t\t-webkit-transform: translateY(0);\n\t\t        transform: translateY(0);\n\t}\n}\n\n.select-month {\n\tdisplay: -ms-flexbox;\n\tdisplay: -webkit-box;\n\tdisplay: flex;\n\t-ms-flex-pack: justify;\n\t        -webkit-box-pack: justify;\n\t    justify-content: space-between;\n\t-ms-flex-align: center;\n\t        -webkit-box-align: center;\n\t    align-items: center;\n\tpadding: 0 25px;\n\tmargin: 15px 0;\n\ttext-align: center;\n}\n.arrow {\n\twidth: 8px;\n\theight: 8px;\n\tpadding: 3px;\n\tcursor: pointer;\n\tborder: 1px solid #4E647B;\n\tborder-right: none;\n\tborder-bottom: none;\n\t-webkit-transform: rotate(-45deg);\n\t        transform: rotate(-45deg);\n}\n.arrow:nth-of-type(2) {\n\t-webkit-transform: rotate(135deg);\n\t        transform: rotate(135deg);\n}\n\n.select-date {\n\twidth: 300px;\n\tmargin: 0 auto;\n}\n.week-header {\n\tdisplay: -ms-flexbox;\n\tdisplay: -webkit-box;\n\tdisplay: flex;\n\t-ms-flex-pack: distribute;\n\t    justify-content: space-around;\n\tpadding: 10px 0;\n\tcolor: #A5A5A5;\n\tfont-size: 12px;\n}\n.select-date tbody {\n\tmargin-top: 10px;\n\ttext-align: right\n}\n.select-date tbody tr {\n\tdisplay: -ms-flexbox;\n\tdisplay: -webkit-box;\n\tdisplay: flex;\n\t-ms-flex-pack: distribute;\n\t    justify-content: space-around;\n}\n.select-date tbody tr td {\n\twidth: 36px;\n\tmargin: 2px 0;\n\tcolor: #4E647B;\n\ttext-align: center;\n\tline-height: 36px;\n\tcursor: pointer;\n}\n.select-date tbody tr .today {\n\tcolor: #0884CE;\n\tfont-weight: bold;\n}\n.select-date tbody tr .selected {\n\tcolor: #FFF;\n\tborder-radius: 100%;\n\tbackground-color: #0884CE;\n}\n.select-date tbody tr .not {\n\topacity: 0;\n\tcursor: default;\n}\n.select-date tbody tr td:hover {\n\tposition: relative;\n\tz-index: 1;\n\tcolor: #FFF;\n}\n.select-date tbody tr td:hover::after {\n\tcontent: \"\";\n\twidth: 36px;\n\theight: 36px;\n\tposition: absolute;\n\ttop: 0;\n\tleft: 0;\n\tz-index: -1;\n\tborder-radius: 100%;\n\tbackground-color: rgba(8, 132, 206, 0.7);\n\t-webkit-animation: scale .3s;\n\t        animation: scale .3s;\n}\n@-webkit-keyframes scale {\n\t0% {\n\t\t-webkit-transform: scale(0.2);\n\t\t        transform: scale(0.2);\n\t}\n\t100% {\n\t\t-webkit-transform: scale(1);\n\t\t        transform: scale(1);\n\t}\n}\n@keyframes scale {\n\t0% {\n\t\t-webkit-transform: scale(0.2);\n\t\t        transform: scale(0.2);\n\t}\n\t100% {\n\t\t-webkit-transform: scale(1);\n\t\t        transform: scale(1);\n\t}\n}\n\n.select-year {\n\theight: 300px;\n\toverflow: hidden;\n\toverflow-y: scroll\n}\n\n.select-year li {\n\tfont-size: 18px;\n\tline-height: 40px;\n\tcursor: pointer;\n\ttext-align: center;\n}\n\n.select-year li.active {\n\t/* margin: 5px 0; */\n\tcolor: #0884CE;\n\tfont-size: 22px;\n\tfont-weight: 800;\n}\n.select-year::-webkit-scrollbar {\n\tdisplay: none;\n}\n\n.calendar-footer {\n\tpadding: 15px 10px 10px;\n\ttext-align: right\n}\n\n.calendar-footer button {\n\tpadding: 8px 20px;\n\tcolor: #0884CE;\n\tcursor: pointer;\n\tline-height: 1.714;\n\tborder: none;\n\tbackground-color: transparent;\n}\n\n.calendar-footer button:hover {\n\tcolor: #FFF;\n\t-webkit-animation: fade-in .5s ease both;\n\t        animation: fade-in .5s ease both;\n}\n\n@-webkit-keyframes fade-in {\n\t0% {\n\t\tbackground-color: rgba(9, 148, 231, .1);\n\t}\n\t100% {\n\t\tbackground-color: rgba(9, 148, 231, .5);\n\t}\n}\n\n@keyframes fade-in {\n\t0% {\n\t\tbackground-color: rgba(9, 148, 231, .1);\n\t}\n\t100% {\n\t\tbackground-color: rgba(9, 148, 231, .5);\n\t}\n}", "", {"version":3,"sources":["/./src/css/calendar.css"],"names":[],"mappings":"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","file":"calendar.css","sourcesContent":[".calendar-wrapper {\n\tdisplay: flex;\n\twidth: 100%;\n\theight: 100%;\n\tposition: fixed;\n\ttop: 0;\n\tleft: 0;\n\ttransition: opacity .3s;\n}\n.calendar-enter .calendar-container, .calendar-leave .calendar-container {\n\ttransform: scale(1.1);\n}\n.calendar-mask {\n\twidth: 100%;\n\theight: 100%;\n\tposition: absolute;\n\ttop: 0;\n\tz-index: -1;\n\tbackground-color: rgba(0, 0, 0, .4);\n}\n.calendar-enter, .calendar-leave {\n\topacity: 0;\n}\n.calendar-container {\n\twidth: 320px;\n\t/* min-height: 500px; */\n\t/* margin: auto; */\n\tmargin-left: -160px;\n\tposition: absolute;\n\tleft: 50%;\n\tbox-shadow: 0 14px 45px rgba(0, 0, 0, .25), 0 10px 18px rgba(0, 0, 0, .22);\n\tbackground-color: #FFF;\n\tuser-select: none;\n\ttransition: transform .3s;\n}\n\n.calendar-header {\n\theight: 72px;\n\tpadding: 20px;\n\tcolor: rgba(255, 255, 255, 0.7);\n\tbackground-color: #0884CE;\n\n\t& p {\n\t\tcursor: pointer;\n\t}\n\n\t& h2 {\n\t\tmargin-top: 10px;\n\t\tfont-size: 36px;\n\t\tcursor: pointer;\n\t}\n\n\t& .active {\n\t\tcolor: #FFF;\n\t}\n\n\t& .up {\n\t\tanimation: up .3s;\n\t}\n\n\t& .down {\n\t\tanimation: down .3s;\n\t}\n}\n\n@keyframes up {\n\t0% {\n\t\ttransform: translateY(-20px);\n\t}\n\t100% {\n\t\ttransform: translateY(0);\n\t}\n}\n@keyframes down {\n\t0% {\n\t\ttransform: translateY(20px);\n\t}\n\t100% {\n\t\ttransform: translateY(0);\n\t}\n}\n\n.select-month {\n\tdisplay: flex;\n\tjustify-content: space-between;\n\talign-items: center;\n\tpadding: 0 25px;\n\tmargin: 15px 0;\n\ttext-align: center;\n}\n.arrow {\n\twidth: 8px;\n\theight: 8px;\n\tpadding: 3px;\n\tcursor: pointer;\n\tborder: 1px solid #4E647B;\n\tborder-right: none;\n\tborder-bottom: none;\n\ttransform: rotate(-45deg);\n}\n.arrow:nth-of-type(2) {\n\ttransform: rotate(135deg);\n}\n\n.select-date {\n\twidth: 300px;\n\tmargin: 0 auto;\n}\n.week-header {\n\tdisplay: flex;\n\tjustify-content: space-around;\n\tpadding: 10px 0;\n\tcolor: #A5A5A5;\n\tfont-size: 12px;\n}\n.select-date tbody {\n\tmargin-top: 10px;\n\ttext-align: right;\n\n\t& tr {\n\t\tdisplay: flex;\n\t\tjustify-content: space-around;\n\n\t\t& td {\n\t\t\twidth: 36px;\n\t\t\tmargin: 2px 0;\n\t\t\tcolor: #4E647B;\n\t\t\ttext-align: center;\n\t\t\tline-height: 36px;\n\t\t\tcursor: pointer;\n\t\t}\n\n\t\t& .today {\n\t\t\tcolor: #0884CE;\n\t\t\tfont-weight: bold;\n\t\t}\n\n\t\t& .selected {\n\t\t\tcolor: #FFF;\n\t\t\tborder-radius: 100%;\n\t\t\tbackground-color: #0884CE;\n\t\t}\n\n\t\t& .not {\n\t\t\topacity: 0;\n\t\t\tcursor: default;\n\t\t}\n\n\t\t& td:hover {\n\t\t\tposition: relative;\n\t\t\tz-index: 1;\n\t\t\tcolor: #FFF;\n\n\t\t\t&::after {\n\t\t\t\tcontent: \"\";\n\t\t\t\twidth: 36px;\n\t\t\t\theight: 36px;\n\t\t\t\tposition: absolute;\n\t\t\t\ttop: 0;\n\t\t\t\tleft: 0;\n\t\t\t\tz-index: -1;\n\t\t\t\tborder-radius: 100%;\n\t\t\t\tbackground-color: rgba(8, 132, 206, 0.7);\n\t\t\t\tanimation: scale .3s;\n\t\t\t}\n\t\t}\n\t}\n}\n@keyframes scale {\n\t0% {\n\t\ttransform: scale(0.2);\n\t}\n\t100% {\n\t\ttransform: scale(1);\n\t}\n}\n\n.select-year {\n\theight: 300px;\n\toverflow: hidden;\n\toverflow-y: scroll;\n\n\t& li {\n\t\tfont-size: 18px;\n\t\tline-height: 40px;\n\t\tcursor: pointer;\n\t\ttext-align: center;\n\t}\n\n\t& li.active {\n\t\t/* margin: 5px 0; */\n\t\tcolor: #0884CE;\n\t\tfont-size: 22px;\n\t\tfont-weight: 800;\n\t}\n}\n.select-year::-webkit-scrollbar {\n\tdisplay: none;\n}\n\n.calendar-footer {\n\tpadding: 15px 10px 10px;\n\ttext-align: right;\n\n\t& button {\n\t\tpadding: 8px 20px;\n\t\tcolor: #0884CE;\n\t\tcursor: pointer;\n\t\tline-height: 1.714;\n\t\tborder: none;\n\t\tbackground-color: transparent;\n\t}\n\n\t& button:hover {\n\t\tcolor: #FFF;\n\t\tanimation: fade-in .5s ease both;\n\t}\n}\n\n@keyframes fade-in {\n\t0% {\n\t\tbackground-color: rgba(9, 148, 231, .1);\n\t}\n\t100% {\n\t\tbackground-color: rgba(9, 148, 231, .5);\n\t}\n}"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 
@@ -11003,7 +11195,7 @@
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\components\\date-header.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src/components/date-header.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(20)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -11012,9 +11204,9 @@
 	}
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), true)
+	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "C:\\Users\\Administrator\\Desktop\\vue-calendar\\src\\components\\date-header.vue"
+	  var id = "_v-0dbd3a08/date-header.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -11067,7 +11259,7 @@
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\components\\date-footer.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src/components/date-footer.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(23)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -11076,9 +11268,9 @@
 	}
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), true)
+	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "C:\\Users\\Administrator\\Desktop\\vue-calendar\\src\\components\\date-footer.vue"
+	  var id = "_v-26ea53d4/date-footer.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -11128,7 +11320,7 @@
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\components\\pick-month.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src/components/pick-month.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(26)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -11137,9 +11329,9 @@
 	}
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), true)
+	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "C:\\Users\\Administrator\\Desktop\\vue-calendar\\src\\components\\pick-month.vue"
+	  var id = "_v-662373f0/pick-month.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -11213,6 +11405,8 @@
 					currentDay--;
 				}
 	
+				first = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+	
 				var count = Math.ceil((days - (7 - first)) / 7);
 				var lastDay = result[0].slice(-1)[0].day;
 	
@@ -11280,7 +11474,7 @@
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src\\components\\date-list.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src/components/date-list.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(29)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -11289,9 +11483,9 @@
 	}
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), true)
+	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "C:\\Users\\Administrator\\Desktop\\vue-calendar\\src\\components\\date-list.vue"
+	  var id = "_v-7a1f1459/date-list.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -11361,7 +11555,7 @@
 /* 30 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"calendar-wrapper\" transition=\"calendar\">\n\t<div class=\"calendar-mask\" @click=\"show = false\"></div>\n\t<div class=\"calendar-container\" :style=\"{top: top}\">\n\t\t<date-header :date-text=\"dateText\" :turn-type=\"turnType\" :status.sync=\"status\"></date-header>\n\t\t<pick-month :date-text.sync=\"dateText\" v-if=\"status\"></pick-month>\n\t\t<date-list :date-text.sync=\"dateText\" v-if=\"! status\"></date-list>\n\t\t<date-footer :show.sync=\"show\" :date=\"date\"></date-footer>\n\t</div>\n</div>\n";
+	module.exports = "\n\n\n<div class=\"calendar-wrapper\" transition=\"calendar\">\n\t<div class=\"calendar-mask\" @click=\"show = false\"></div>\n\t<div class=\"calendar-container\" :style=\"{top: top}\">\n\t\t<date-header :date-text=\"dateText\" :turn-type=\"turnType\" :status.sync=\"status\"></date-header>\n\t\t<pick-month :date-text.sync=\"dateText\" v-if=\"status\"></pick-month>\n\t\t<date-list :date-text.sync=\"dateText\" v-if=\"! status\"></date-list>\n\t\t<date-footer :show.sync=\"show\" :date=\"date\"></date-footer>\n\t</div>\n</div>\n";
 
 /***/ },
 /* 31 */
