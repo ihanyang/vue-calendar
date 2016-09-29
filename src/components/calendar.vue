@@ -1,89 +1,248 @@
 <style src="../css/calendar.css"></style>
 
 <template>
-	<div class="calendar-wrapper" transition="calendar">
-		<div class="calendar-mask" @click="show = false"></div>
-		<div class="calendar-container" :style="{top: top}">
-			<date-header :date-text="dateText" :turn-type="turnType" :status.sync="status"></date-header>
-			<pick-month :date-text.sync="dateText" v-if="status"></pick-month>
-			<date-list :date-text.sync="dateText" v-if="! status"></date-list>
-			<date-footer :show.sync="show" :date="date"></date-footer>
+	<div class="calendar-panel" >
+		<div class="calendar-panel-header">
+			<div class="year" @click="selectYear">{{year}}年{{month}}月</div>
+			<div class="prev-arrow" @click="prevMonth" v-if="stage === 0"></div>
+			<div  class="next-arrow" @click="nextMonth" v-if="stage === 0"></div>
+		</div>
+		<div class="calendar-panel-content" v-if="stage === 0">
+			<div class="calendar-header">
+				<span v-for="item of weeks" v-text="item"></span>
+			</div>
+			<div class="calendar-content">
+				<template track-by="$index" v-for="item of dates">
+					<a href="javascript:;" class="prev-month" v-if="$index < firstDay - 1"  v-text="item"></a>
+
+					<a href="javascript:;" class="available" :class="{selected: year === + dateValue.substr(0, 4) && month === + dateValue.substr(5, 2) && item === today && $index > firstDay - 2 && $index < lastDay + firstDay - 1, today: year === currentYear && month === currentMonth && item === currentDay && $index > firstDay - 2 && $index < lastDay + firstDay - 1}" v-if="$index > firstDay - 2 && $index < lastDay + firstDay - 1" v-text="(year === currentYear && month === currentMonth && item === currentDay && $index > firstDay - 2 && $index < lastDay + firstDay - 1) ? '今天' : item" @click="selectDate(item)"></a>
+
+					<a href="javascript:;" class="next-month" v-if="$index > lastDay + firstDay - 2" v-text="item"></a>
+				</template>
+			</div>
+		</div>
+		<div class="calendar-year" v-if="stage === 1">
+			<!-- <div class="year-shadow-before"></div> -->
+			<ul>
+				<li v-for="item of yearList" v-text="item" @click="selectMonth(item)"></li>
+			</ul>
+			<!-- <div class="year-shadow-after"></div> -->
+		</div>
+		<div class="calendar-month" v-if="stage === 2">
+			<ul>
+				<li v-for="item of monthList" v-text="item" @click="render(item)"></li>
+			</ul>
 		</div>
 	</div>
 </template>
 
 <script>
-	import dateHeader from "./date-header.vue"
-	import dateFooter from "./date-footer.vue"
-	import pickMonth from "./pick-month.vue"
-	import dateList from "./date-list.vue"
-	
 	export default {
-		props: ["show", "dateText"],
-		data() {
-			return {
-				aa: new Date(this.dateText),
-				status: true,
-				top: 0,
-				turnType: ""
+		props: {
+			showDatePicker: {
+				default: false,
+				required: true
+			},
+			dateValue: {
+				default: "",
+				type: String,
+				required: true
 			}
 		},
-		components: {
-			dateHeader,
-			dateFooter,
-			pickMonth,
-			dateList
+		data() {
+			return {
+				dates: [],
+				year: 0,
+				currentYear: new Date().getFullYear(),
+				month: 0,
+				currentMonth: new Date().getMonth() + 1,
+				today: 0,
+				currentDay: new Date().getDate(),
+
+				firstDay: 0,
+				lastDay: 0,
+
+				weeks: ["一", "二", "三", "四", "五", "六", "日"],
+				stage: 0,
+				yearList: [],
+				monthList: []
+			}
 		},
 		computed: {
 			date() {
-				return new Date(this.dateText)
-			},
-			week() {
-				let array = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-				let day = new Date(this.dateText).getDay()
-
-				return array[day]
-			},
-			month() {
-				let array = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-				let month = new Date(this.dateText).getMonth()
-
-				return array[month]
-			},
-			day() {
-				return this.dateText.slice(-2)
+				return this.dateValue ? new Date(this.dateValue) : new Date()
 			}
 		},
-		watch: {
-			dateText() {
-				this.$nextTick(() => {
-					let currentDay = + this.dateText.slice(-2)
-					let date = this.date
-					let year = date.getFullYear()
-					let month = date.getMonth() + 1
-					let day = date.getDate()
+		methods: {
+			prevYear() {
+				this.date.setFullYear(this.date.getFullYear() - 1)
 
-					let str = `${year}/${month}/${day}`
+				this.getCal()
+			},
+			prevMonth() {
+				if (this.date.getMonth() === 0) {
+					this.date.setFullYear(this.date.getFullYear() - 1)
 
-					this.dateText = str.replace(/\b(\w)\b/g, "0$1")
+					this.date.setMonth(11)
+				} else {
+					this.date.setMonth(this.date.getMonth() - 1)
+				}
 
-					day < currentDay ? this.turnType = "up" : this.turnType = "down"
-				})
+				this.getCal()
+			},
+			nextMonth() {
+				if (this.date.getMonth() + 1 > 11) {
+					this.date.setFullYear(this.date.getFullYear() + 1)
+
+					this.date.setMonth(0)
+				} else {
+					this.date.setMonth(this.date.getMonth() + 1)
+				}
+
+				this.getCal()
+			},
+			nextYear() {
+				this.date.setFullYear(this.date.getFullYear() + 1)
+
+				this.getCal()
+			},
+			getCal(month) {
+				const dates = []
+
+				let years = this.date.getFullYear()
+				let months = this.date.getMonth()
+
+				let firstDay = new Date(years, months, 1).getDay() // 当月第一天是星期几
+				let lastDay = new Date(years, months + 1, 0).getDate() // 求出当月共有几天
+
+				// 当月
+				let count = 0
+				let i = 1
+				let index = firstDay - 1 - 1
+
+				if (firstDay === 0) {
+					index = 5
+				}
+
+				if (firstDay === 1) {
+					index = 6
+				}
+
+				count = index
+
+				while(count++ < lastDay + index) {
+					dates[count] = i++
+				}
+
+				// 上个月
+				let prevLastDay = new Date(years, months, 0).getDate() // 上个月共有几天
+				let prevCount = firstDay - 1
+
+				if (firstDay === 0) {
+					prevCount = 6
+				}
+
+				if (firstDay === 1) {
+					prevCount = 7
+				}
+
+				while (prevCount--) {
+					dates[prevCount] = prevLastDay--
+				}
+
+				// 下个月
+				let nextI = 0
+				let nextCount = 42 - lastDay - (firstDay - 1)
+				let nextIndex = lastDay + firstDay - 1
+
+				if (firstDay === 0) {
+					nextCount = 42 - lastDay - 6
+
+					nextIndex = lastDay + 6
+				}
+
+				if (firstDay === 1) {
+					nextCount = 42 - lastDay - 7
+
+					nextIndex = lastDay + 7
+				}
+
+				while (nextCount--) {
+					dates[nextIndex + nextI] = nextI + 1
+
+					nextI++
+				}
+
+				this.dates = dates
+
+				this.year = this.date.getFullYear()
+				this.month = this.date.getMonth() + 1
+				this.today = this.date.getDate()
+
+				this.firstDay = firstDay
+
+				if (firstDay === 0) {
+					this.firstDay = 7
+				}
+
+				if (firstDay === 1) {
+					this.firstDay = 8
+				}
+
+				this.lastDay = lastDay
+			},
+			selectYear() {
+				this.stage = 1
+			},
+			selectMonth(value) {
+				this.date.setFullYear(value)
+
+				this.stage = 2
+			},
+			render(value) {
+				value = parseInt(value) - 1
+
+				this.stage = 0
+
+				this.date.setMonth(value)
+
+				this.getCal()
+			},
+			selectDate(value) {
+				const date = new Date(this.date.getFullYear(), this.date.getMonth(), value)
+
+				this.dateValue = date.toLocaleDateString().replace(/\//g, "-").replace(/\b(\w)\b/g, "0$1")
+
+				this.showDatePicker = false
 			}
 		},
 		ready() {
-			let height = document.querySelector(".calendar-container").offsetHeight,
-				docHeight = document.documentElement.clientHeight
+			this.getCal()
 
-			this.top = (docHeight - height) / 2 + "px"
+			const prevYear = []
+			const nextYear = []
+			const currentYear = new Date().getFullYear()
 
-			let turnTarget = document.querySelector(".calendar-header h2")
+			let i = 0
 
-			turnTarget.addEventListener("animationend", (e) => {
-				e.target.className = ""
+			while (i++ < 100) {
+				prevYear.unshift(currentYear - i)
+			}
 
-				this.turnType = ""
-			}, false)
+			i = 0
+
+			while (i++ < 100) {
+				nextYear.push(currentYear + i)
+			}
+
+			this.yearList = [... prevYear, currentYear, ... nextYear]
+
+			// 月份
+			i = 0
+
+			while (i++ < 12) {
+				this.monthList.push(`${i}月`)
+			}
 		}
 	}
 </script>
