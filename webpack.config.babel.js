@@ -3,10 +3,13 @@ import precss from "precss"
 import autoprefixer from "autoprefixer"
 
 module.exports = {
-	entry: "./demo/app.js",
+	entry: {
+		app: "./src/app.js",
+		vendors: ["vue"]
+	},
 	output: {
 		path: path.resolve(__dirname, "./dist"),
-		filename: "app.js",
+		filename: "[name].js",
 		publicPath: "/dist/"
 	},
 	module: {
@@ -27,15 +30,7 @@ module.exports = {
 		]
 	},
 	vue: {
-		postcss: [precss, autoprefixer({
-			browsers: "last 2 versions"
-		})]
+		postcss: [precss]
 	},
-	postcss: [
-		precss,
-		autoprefixer({
-			browsers: "last 2 versions"
-		})
-	],
 	devtool: "source-map"
 }
