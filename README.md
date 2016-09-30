@@ -5,13 +5,9 @@
 # Usage
 ```vue
 <template>
-	<calendar :show.sync="show" :date-text.sync="dateText" v-if="show"></calendar>
+	<calendar :show-date-picker.sync="showDatePicker" :time.sync="time" :date-value.sync="dateValue" v-if="showDatePicker" transition="calendar"></calendar>
 </template>
 ```
-
-# Screenshots
-
-![screenshot](https://github.com/ihanyang/vue-calendar/blob/master/screenshot.gif)
 
 # Liceense
 [The MIT License](http://opensource.org/licenses/MIT)
