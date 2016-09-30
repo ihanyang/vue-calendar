@@ -6,6 +6,7 @@
 	}
 	.date-editor {
 		padding: 5px 10px;
+		cursor: pointer;
 		border-radius: 2px;
 		border: 1px solid #CCC;
 	}
@@ -16,8 +17,8 @@
 
 <template>
 	<div class="container">
-		<input type="text" class="date-editor" placeholder="选择日期" :disabled="disabled" v-model="dateValue" @focus="focus" @blur="blur">
-		<calendar :show-date-picker.sync="showDatePicker" :date-value.sync="dateValue" v-if="showDatePicker" transition="calendar"></calendar>
+		<input type="text" class="date-editor" placeholder="选择日期" readonly v-model="dateValue" @focus="focus">
+		<calendar :show-date-picker.sync="showDatePicker" :time.sync="time" :date-value.sync="dateValue" v-if="showDatePicker" transition="calendar"></calendar>
 	</div>
 </template>
 
@@ -29,7 +30,7 @@
 			return {
 				showDatePicker: false,
 				dateValue: "",
-				disabled: false
+				time: 0
 			}
 		},
 		components: {
@@ -38,11 +39,9 @@
 		methods: {
 			focus() {
 				this.showDatePicker = true
-
-				this.disabled = true
 			},
 			blur() {
-				this.disabled = false
+				//this.showDatePicker = false
 			},
 			createDateText() {
 				let date = new Date()

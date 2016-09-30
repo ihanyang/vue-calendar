@@ -47,6 +47,10 @@
 				default: "",
 				type: String,
 				required: true
+			},
+			time: {
+				default: 0,
+				type: Number
 			}
 		},
 		data() {
@@ -70,7 +74,7 @@
 		},
 		computed: {
 			date() {
-				return this.dateValue ? new Date(this.dateValue) : new Date()
+				return this.dateValue ? new Date(this.time) : new Date()
 			}
 		},
 		methods: {
@@ -211,7 +215,9 @@
 			selectDate(value) {
 				const date = new Date(this.date.getFullYear(), this.date.getMonth(), value)
 
-				this.dateValue = date.toLocaleDateString().replace(/\//g, "-").replace(/\b(\w)\b/g, "0$1")
+				this.dateValue = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`.replace(/\b(\w)\b/g, "0$1")
+
+				this.time = date.getTime()
 
 				this.showDatePicker = false
 			}
