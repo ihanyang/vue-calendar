@@ -85,8 +85,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/.npminstall/css-loader/0.23.1/css-loader/index.js!./normalize.css", function() {
-				var newContent = require("!!./../../node_modules/.npminstall/css-loader/0.23.1/css-loader/index.js!./normalize.css");
+			module.hot.accept("!!./../../node_modules/.0.23.1@css-loader/index.js!./normalize.css", function() {
+				var newContent = require("!!./../../node_modules/.0.23.1@css-loader/index.js!./normalize.css");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -433,8 +433,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/.npminstall/css-loader/0.23.1/css-loader/index.js!./common.css", function() {
-				var newContent = require("!!./../../node_modules/.npminstall/css-loader/0.23.1/css-loader/index.js!./common.css");
+			module.hot.accept("!!./../../node_modules/.0.23.1@css-loader/index.js!./common.css", function() {
+				var newContent = require("!!./../../node_modules/.0.23.1@css-loader/index.js!./common.css");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -461,8 +461,8 @@
 /* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(global, process) {/*!
-	 * Vue.js v1.0.26
+	/* WEBPACK VAR INJECTION */(function(process) {/*!
+	 * Vue.js v1.0.28
 	 * (c) 2016 Evan You
 	 * Released under the MIT License.
 	 */
@@ -618,7 +618,7 @@
 	}
 	
 	/**
-	 * Camelize a hyphen-delmited string.
+	 * Camelize a hyphen-delimited string.
 	 *
 	 * @param {String} str
 	 * @return {String}
@@ -641,10 +641,10 @@
 	 * @return {String}
 	 */
 	
-	var hyphenateRE = /([a-z\d])([A-Z])/g;
+	var hyphenateRE = /([^-])([A-Z])/g;
 	
 	function hyphenate(str) {
-	  return str.replace(hyphenateRE, '$1-$2').toLowerCase();
+	  return str.replace(hyphenateRE, '$1-$2').replace(hyphenateRE, '$1-$2').toLowerCase();
 	}
 	
 	/**
@@ -864,12 +864,7 @@
 	var isIE = UA && UA.indexOf('trident') > 0;
 	var isIE9 = UA && UA.indexOf('msie 9.0') > 0;
 	var isAndroid = UA && UA.indexOf('android') > 0;
-	var isIos = UA && /(iphone|ipad|ipod|ios)/i.test(UA);
-	var iosVersionMatch = isIos && UA.match(/os ([\d_]+)/);
-	var iosVersion = iosVersionMatch && iosVersionMatch[1].split('_');
-	
-	// detecting iOS UIWebView by indexedDB
-	var hasMutationObserverBug = iosVersion && Number(iosVersion[0]) >= 9 && Number(iosVersion[1]) >= 3 && !window.indexedDB;
+	var isIOS = UA && /iphone|ipad|ipod|ios/.test(UA);
 	
 	var transitionProp = undefined;
 	var transitionEndEvent = undefined;
@@ -886,6 +881,12 @@
 	  animationEndEvent = isWebkitAnim ? 'webkitAnimationEnd' : 'animationend';
 	}
 	
+	/* istanbul ignore next */
+	function isNative(Ctor) {
+	  return (/native code/.test(Ctor.toString())
+	  );
+	}
+	
 	/**
 	 * Defer a task to execute it asynchronously. Ideally this
 	 * should be executed as a microtask, so we leverage
@@ -899,35 +900,55 @@
 	var nextTick = (function () {
 	  var callbacks = [];
 	  var pending = false;
-	  var timerFunc;
+	  var timerFunc = undefined;
+	
 	  function nextTickHandler() {
 	    pending = false;
 	    var copies = callbacks.slice(0);
-	    callbacks = [];
+	    callbacks.length = 0;
 	    for (var i = 0; i < copies.length; i++) {
 	      copies[i]();
 	    }
 	  }
 	
+	  // the nextTick behavior leverages the microtask queue, which can be accessed
+	  // via either native Promise.then or MutationObserver.
+	  // MutationObserver has wider support, however it is seriously bugged in
+	  // UIWebView in iOS >= 9.3.3 when triggered in touch event handlers. It
+	  // completely stops working after triggering a few times... so, if native
+	  // Promise is available, we will use it:
 	  /* istanbul ignore if */
-	  if (typeof MutationObserver !== 'undefined' && !hasMutationObserverBug) {
+	  if (typeof Promise !== 'undefined' && isNative(Promise)) {
+	    var p = Promise.resolve();
+	    var noop = function noop() {};
+	    timerFunc = function () {
+	      p.then(nextTickHandler);
+	      // in problematic UIWebViews, Promise.then doesn't completely break, but
+	      // it can get stuck in a weird state where callbacks are pushed into the
+	      // microtask queue but the queue isn't being flushed, until the browser
+	      // needs to do some other work, e.g. handle a timer. Therefore we can
+	      // "force" the microtask queue to be flushed by adding an empty timer.
+	      if (isIOS) setTimeout(noop);
+	    };
+	  } else if (typeof MutationObserver !== 'undefined') {
+	    // use MutationObserver where native Promise is not available,
+	    // e.g. IE11, iOS7, Android 4.4
 	    var counter = 1;
 	    var observer = new MutationObserver(nextTickHandler);
-	    var textNode = document.createTextNode(counter);
+	    var textNode = document.createTextNode(String(counter));
 	    observer.observe(textNode, {
 	      characterData: true
 	    });
 	    timerFunc = function () {
 	      counter = (counter + 1) % 2;
-	      textNode.data = counter;
+	      textNode.data = String(counter);
 	    };
 	  } else {
-	    // webpack attempts to inject a shim for setImmediate
-	    // if it is used as a global, so we have to work around that to
-	    // avoid bundling unnecessary code.
-	    var context = inBrowser ? window : typeof global !== 'undefined' ? global : {};
-	    timerFunc = context.setImmediate || setTimeout;
+	    // fallback to setTimeout
+	    /* istanbul ignore next */
+	    timerFunc = setTimeout;
 	  }
+	
 	  return function (cb, ctx) {
 	    var func = ctx ? function () {
 	      cb.call(ctx);
@@ -941,7 +962,7 @@
 	
 	var _Set = undefined;
 	/* istanbul ignore if */
-	if (typeof Set !== 'undefined' && Set.toString().match(/native code/)) {
+	if (typeof Set !== 'undefined' && isNative(Set)) {
 	  // use native Set when available.
 	  _Set = Set;
 	} else {
@@ -1062,7 +1083,6 @@
 	};
 	
 	var cache$1 = new Cache(1000);
-	var filterTokenRE = /[^\s'"]+|'[^']*'|"[^"]*"/g;
 	var reservedArgRE = /^in$|^-?\d+/;
 	
 	/**
@@ -1071,35 +1091,167 @@
 	
 	var str;
 	var dir;
-	var c;
-	var prev;
-	var i;
-	var l;
-	var lastFilterIndex;
-	var inSingle;
-	var inDouble;
-	var curly;
-	var square;
-	var paren;
-	/**
-	 * Push a filter to the current directive object
-	 */
+	var len;
+	var index;
+	var chr;
+	var state;
+	var startState = 0;
+	var filterState = 1;
+	var filterNameState = 2;
+	var filterArgState = 3;
 	
-	function pushFilter() {
-	  var exp = str.slice(lastFilterIndex, i).trim();
-	  var filter;
-	  if (exp) {
-	    filter = {};
-	    var tokens = exp.match(filterTokenRE);
-	    filter.name = tokens[0];
-	    if (tokens.length > 1) {
-	      filter.args = tokens.slice(1).map(processFilterArg);
+	var doubleChr = 0x22;
+	var singleChr = 0x27;
+	var pipeChr = 0x7C;
+	var escapeChr = 0x5C;
+	var spaceChr = 0x20;
+	
+	var expStartChr = { 0x5B: 1, 0x7B: 1, 0x28: 1 };
+	var expChrPair = { 0x5B: 0x5D, 0x7B: 0x7D, 0x28: 0x29 };
+	
+	function peek() {
+	  return str.charCodeAt(index + 1);
+	}
+	
+	function next() {
+	  return str.charCodeAt(++index);
+	}
+	
+	function eof() {
+	  return index >= len;
+	}
+	
+	function eatSpace() {
+	  while (peek() === spaceChr) {
+	    next();
+	  }
+	}
+	
+	function isStringStart(chr) {
+	  return chr === doubleChr || chr === singleChr;
+	}
+	
+	function isExpStart(chr) {
+	  return expStartChr[chr];
+	}
+	
+	function isExpEnd(start, chr) {
+	  return expChrPair[start] === chr;
+	}
+	
+	function parseString() {
+	  var stringQuote = next();
+	  var chr;
+	  while (!eof()) {
+	    chr = next();
+	    // escape char
+	    if (chr === escapeChr) {
+	      next();
+	    } else if (chr === stringQuote) {
+	      break;
 	    }
 	  }
-	  if (filter) {
-	    (dir.filters = dir.filters || []).push(filter);
+	}
+	
+	function parseSpecialExp(chr) {
+	  var inExp = 0;
+	  var startChr = chr;
+	
+	  while (!eof()) {
+	    chr = peek();
+	    if (isStringStart(chr)) {
+	      parseString();
+	      continue;
+	    }
+	
+	    if (startChr === chr) {
+	      inExp++;
+	    }
+	    if (isExpEnd(startChr, chr)) {
+	      inExp--;
+	    }
+	
+	    next();
+	
+	    if (inExp === 0) {
+	      break;
+	    }
 	  }
-	  lastFilterIndex = i + 1;
+	}
+	
+	/**
+	 * syntax:
+	 * expression | filterName  [arg  arg [| filterName arg arg]]
+	 */
+	
+	function parseExpression() {
+	  var start = index;
+	  while (!eof()) {
+	    chr = peek();
+	    if (isStringStart(chr)) {
+	      parseString();
+	    } else if (isExpStart(chr)) {
+	      parseSpecialExp(chr);
+	    } else if (chr === pipeChr) {
+	      next();
+	      chr = peek();
+	      if (chr === pipeChr) {
+	        next();
+	      } else {
+	        if (state === startState || state === filterArgState) {
+	          state = filterState;
+	        }
+	        break;
+	      }
+	    } else if (chr === spaceChr && (state === filterNameState || state === filterArgState)) {
+	      eatSpace();
+	      break;
+	    } else {
+	      if (state === filterState) {
+	        state = filterNameState;
+	      }
+	      next();
+	    }
+	  }
+	
+	  return str.slice(start + 1, index) || null;
+	}
+	
+	function parseFilterList() {
+	  var filters = [];
+	  while (!eof()) {
+	    filters.push(parseFilter());
+	  }
+	  return filters;
+	}
+	
+	function parseFilter() {
+	  var filter = {};
+	  var args;
+	
+	  state = filterState;
+	  filter.name = parseExpression().trim();
+	
+	  state = filterArgState;
+	  args = parseFilterArguments();
+	
+	  if (args.length) {
+	    filter.args = args;
+	  }
+	  return filter;
+	}
+	
+	function parseFilterArguments() {
+	  var args = [];
+	  while (!eof() && state !== filterState) {
+	    var arg = parseExpression();
+	    if (!arg) {
+	      break;
+	    }
+	    args.push(processFilterArg(arg));
+	  }
+	
+	  return args;
 	}
 	
 	/**
@@ -1151,56 +1303,22 @@
 	
 	  // reset parser state
 	  str = s;
-	  inSingle = inDouble = false;
-	  curly = square = paren = 0;
-	  lastFilterIndex = 0;
 	  dir = {};
+	  len = str.length;
+	  index = -1;
+	  chr = '';
+	  state = startState;
 	
-	  for (i = 0, l = str.length; i < l; i++) {
-	    prev = c;
-	    c = str.charCodeAt(i);
-	    if (inSingle) {
-	      // check single quote
-	      if (c === 0x27 && prev !== 0x5C) inSingle = !inSingle;
-	    } else if (inDouble) {
-	      // check double quote
-	      if (c === 0x22 && prev !== 0x5C) inDouble = !inDouble;
-	    } else if (c === 0x7C && // pipe
-	    str.charCodeAt(i + 1) !== 0x7C && str.charCodeAt(i - 1) !== 0x7C) {
-	      if (dir.expression == null) {
-	        // first filter, end of expression
-	        lastFilterIndex = i + 1;
-	        dir.expression = str.slice(0, i).trim();
-	      } else {
-	        // already has filter
-	        pushFilter();
-	      }
-	    } else {
-	      switch (c) {
-	        case 0x22:
-	          inDouble = true;break; // "
-	        case 0x27:
-	          inSingle = true;break; // '
-	        case 0x28:
-	          paren++;break; // (
-	        case 0x29:
-	          paren--;break; // )
-	        case 0x5B:
-	          square++;break; // [
-	        case 0x5D:
-	          square--;break; // ]
-	        case 0x7B:
-	          curly++;break; // {
-	        case 0x7D:
-	          curly--;break; // }
-	      }
+	  var filters;
+	
+	  if (str.indexOf('|') < 0) {
+	    dir.expression = str.trim();
+	  } else {
+	    dir.expression = parseExpression().trim();
+	    filters = parseFilterList();
+	    if (filters.length) {
+	      dir.filters = filters;
 	    }
-	  }
-	
-	  if (dir.expression == null) {
-	    dir.expression = str.slice(0, i).trim();
-	  } else if (lastFilterIndex !== 0) {
-	    pushFilter();
 	  }
 	
 	  cache$1.put(s, dir);
@@ -2789,10 +2907,7 @@
 		isIE: isIE,
 		isIE9: isIE9,
 		isAndroid: isAndroid,
-		isIos: isIos,
-		iosVersionMatch: iosVersionMatch,
-		iosVersion: iosVersion,
-		hasMutationObserverBug: hasMutationObserverBug,
+		isIOS: isIOS,
 		get transitionProp () { return transitionProp; },
 		get transitionEndEvent () { return transitionEndEvent; },
 		get animationProp () { return animationProp; },
@@ -2892,7 +3007,7 @@
 	
 	    // fragment:
 	    // if this instance is compiled inside a Fragment, it
-	    // needs to reigster itself as a child of that fragment
+	    // needs to register itself as a child of that fragment
 	    // for attach/detach to work properly.
 	    this._frag = options._frag;
 	    if (this._frag) {
@@ -3197,7 +3312,7 @@
 	 */
 	
 	function getPath(obj, path) {
-	  return parseExpression(path).get(obj);
+	  return parseExpression$1(path).get(obj);
 	}
 	
 	/**
@@ -3232,7 +3347,7 @@
 	    last = obj;
 	    key = path[i];
 	    if (key.charAt(0) === '*') {
-	      key = parseExpression(key.slice(1)).get.call(original, original);
+	      key = parseExpression$1(key.slice(1)).get.call(original, original);
 	    }
 	    if (i < l - 1) {
 	      obj = obj[key];
@@ -3276,7 +3391,7 @@
 	
 	var wsRE = /\s/g;
 	var newlineRE = /\n/g;
-	var saveRE = /[\{,]\s*[\w\$_]+\s*:|('(?:[^'\\]|\\.)*'|"(?:[^"\\]|\\.)*"|`(?:[^`\\]|\\.)*\$\{|\}(?:[^`\\]|\\.)*`|`(?:[^`\\]|\\.)*`)|new |typeof |void /g;
+	var saveRE = /[\{,]\s*[\w\$_]+\s*:|('(?:[^'\\]|\\.)*'|"(?:[^"\\]|\\.)*"|`(?:[^`\\]|\\.)*\$\{|\}(?:[^`\\"']|\\.)*`|`(?:[^`\\]|\\.)*`)|new |typeof |void /g;
 	var restoreRE = /"(\d+)"/g;
 	var pathTestRE = /^[A-Za-z_$][\w$]*(?:\.[A-Za-z_$][\w$]*|\['.*?'\]|\[".*?"\]|\[\d+\]|\[[A-Za-z_$][\w$]*\])*$/;
 	var identRE = /[^\w$\.](?:[A-Za-z_$][\w$]*)/g;
@@ -3423,7 +3538,7 @@
 	 * @return {Function}
 	 */
 	
-	function parseExpression(exp, needSet) {
+	function parseExpression$1(exp, needSet) {
 	  exp = exp.trim();
 	  // try cache
 	  var hit = expressionCache.get(exp);
@@ -3462,7 +3577,7 @@
 	}
 	
 	var expression = Object.freeze({
-	  parseExpression: parseExpression,
+	  parseExpression: parseExpression$1,
 	  isSimplePath: isSimplePath
 	});
 	
@@ -3614,7 +3729,7 @@
 	    this.getter = expOrFn;
 	    this.setter = undefined;
 	  } else {
-	    var res = parseExpression(expOrFn, this.twoWay);
+	    var res = parseExpression$1(expOrFn, this.twoWay);
 	    this.getter = res.get;
 	    this.setter = res.set;
 	  }
@@ -4458,6 +4573,10 @@
 	  params: ['track-by', 'stagger', 'enter-stagger', 'leave-stagger'],
 	
 	  bind: function bind() {
+	    if (process.env.NODE_ENV !== 'production' && this.el.hasAttribute('v-if')) {
+	      warn('<' + this.el.tagName.toLowerCase() + ' v-for="' + this.expression + '" v-if="' + this.el.getAttribute('v-if') + '">: ' + 'Using v-if and v-for on the same element is not recommended - ' + 'consider filtering the source Array instead.', this.vm);
+	    }
+	
 	    // support "item in/of items" syntax
 	    var inMatch = this.expression.match(/(.*) (?:in|of) (.*)/);
 	    if (inMatch) {
@@ -4568,7 +4687,7 @@
 	          });
 	        }
 	      } else {
-	        // new isntance
+	        // new instance
 	        frag = this.create(value, alias, i, key);
 	        frag.fresh = !init;
 	      }
@@ -5003,24 +5122,6 @@
 	}
 	
 	/**
-	 * Find a vm from a fragment.
-	 *
-	 * @param {Fragment} frag
-	 * @return {Vue|undefined}
-	 */
-	
-	function findVmFromFrag(frag) {
-	  var node = frag.node;
-	  // handle multi-node frag
-	  if (frag.end) {
-	    while (!node.__vue__ && node !== frag.end && node.nextSibling) {
-	      node = node.nextSibling;
-	    }
-	  }
-	  return node.__vue__;
-	}
-	
-	/**
 	 * Create a range array from given number.
 	 *
 	 * @param {Number} n
@@ -5053,6 +5154,24 @@
 	  vFor.warnDuplicate = function (value) {
 	    warn('Duplicate value found in v-for="' + this.descriptor.raw + '": ' + JSON.stringify(value) + '. Use track-by="$index" if ' + 'you are expecting duplicate values.', this.vm);
 	  };
+	}
+	
+	/**
+	 * Find a vm from a fragment.
+	 *
+	 * @param {Fragment} frag
+	 * @return {Vue|undefined}
+	 */
+	
+	function findVmFromFrag(frag) {
+	  var node = frag.node;
+	  // handle multi-node frag
+	  if (frag.end) {
+	    while (!node.__vue__ && node !== frag.end && node.nextSibling) {
+	      node = node.nextSibling;
+	    }
+	  }
+	  return node.__vue__;
 	}
 	
 	var vIf = {
@@ -5452,15 +5571,16 @@
 	    }
 	
 	    this.listener = function () {
-	      var model = self._watcher.value;
+	      var model = self._watcher.get();
 	      if (isArray(model)) {
 	        var val = self.getValue();
+	        var i = indexOf(model, val);
 	        if (el.checked) {
-	          if (indexOf(model, val) < 0) {
-	            model.push(val);
+	          if (i < 0) {
+	            self.set(model.concat(val));
 	          }
-	        } else {
-	          model.$remove(val);
+	        } else if (i > -1) {
+	          self.set(model.slice(0, i).concat(model.slice(i + 1)));
 	        }
 	      } else {
 	        self.set(getBooleanValue());
@@ -5977,6 +6097,12 @@
 	  }
 	};
 	
+	// logic control
+	// two-way binding
+	// event handling
+	// attributes
+	// ref & el
+	// cloak
 	// must export plain object
 	var directives = {
 	  text: text$1,
@@ -6468,6 +6594,7 @@
 	
 	function compileProps(el, propOptions, vm) {
 	  var props = [];
+	  var propsData = vm.$options.propsData;
 	  var names = Object.keys(propOptions);
 	  var i = names.length;
 	  var options, name, attr, value, path, parsed, prop;
@@ -6535,13 +6662,16 @@
 	    } else if ((value = getAttr(el, attr)) !== null) {
 	      // has literal binding!
 	      prop.raw = value;
+	    } else if (propsData && (value = propsData[name] || propsData[path]) !== null) {
+	      // has propsData
+	      prop.raw = value;
 	    } else if (process.env.NODE_ENV !== 'production') {
 	      // check possible camelCase prop usage
 	      var lowerCaseName = path.toLowerCase();
 	      value = /[A-Z\-]/.test(name) && (el.getAttribute(lowerCaseName) || el.getAttribute(':' + lowerCaseName) || el.getAttribute('v-bind:' + lowerCaseName) || el.getAttribute(':' + lowerCaseName + '.once') || el.getAttribute('v-bind:' + lowerCaseName + '.once') || el.getAttribute(':' + lowerCaseName + '.sync') || el.getAttribute('v-bind:' + lowerCaseName + '.sync'));
 	      if (value) {
 	        warn('Possible usage error for prop `' + lowerCaseName + '` - ' + 'did you mean `' + attr + '`? HTML is case-insensitive, remember to use ' + 'kebab-case for props in templates.', vm);
-	      } else if (options.required) {
+	      } else if (options.required && (!propsData || !(name in propsData) && !(path in propsData))) {
 	        // warn missing required
 	        warn('Missing required prop: ' + name, vm);
 	      }
@@ -7386,7 +7516,7 @@
 	  var originalDirCount = vm._directives.length;
 	  linker();
 	  var dirs = vm._directives.slice(originalDirCount);
-	  dirs.sort(directiveComparator);
+	  sortDirectives(dirs);
 	  for (var i = 0, l = dirs.length; i < l; i++) {
 	    dirs[i]._bind();
 	  }
@@ -7394,16 +7524,37 @@
 	}
 	
 	/**
-	 * Directive priority sort comparator
+	 * sort directives by priority (stable sort)
 	 *
-	 * @param {Object} a
-	 * @param {Object} b
+	 * @param {Array} dirs
 	 */
+	function sortDirectives(dirs) {
+	  if (dirs.length === 0) return;
 	
-	function directiveComparator(a, b) {
-	  a = a.descriptor.def.priority || DEFAULT_PRIORITY;
-	  b = b.descriptor.def.priority || DEFAULT_PRIORITY;
-	  return a > b ? -1 : a === b ? 0 : 1;
+	  var groupedMap = {};
+	  var i, j, k, l;
+	  var index = 0;
+	  var priorities = [];
+	  for (i = 0, j = dirs.length; i < j; i++) {
+	    var dir = dirs[i];
+	    var priority = dir.descriptor.def.priority || DEFAULT_PRIORITY;
+	    var array = groupedMap[priority];
+	    if (!array) {
+	      array = groupedMap[priority] = [];
+	      priorities.push(priority);
+	    }
+	    array.push(dir);
+	  }
+	
+	  priorities.sort(function (a, b) {
+	    return a > b ? -1 : a === b ? 0 : 1;
+	  });
+	  for (i = 0, j = priorities.length; i < j; i++) {
+	    var group = groupedMap[priorities[i]];
+	    for (k = 0, l = group.length; k < l; k++) {
+	      dirs[index++] = group[k];
+	    }
+	  }
 	}
 	
 	/**
@@ -7521,7 +7672,13 @@
 	    });
 	    if (names.length) {
 	      var plural = names.length > 1;
-	      warn('Attribute' + (plural ? 's ' : ' ') + names.join(', ') + (plural ? ' are' : ' is') + ' ignored on component ' + '<' + options.el.tagName.toLowerCase() + '> because ' + 'the component is a fragment instance: ' + 'http://vuejs.org/guide/components.html#Fragment-Instance');
+	
+	      var componentName = options.el.tagName.toLowerCase();
+	      if (componentName === 'component' && options.name) {
+	        componentName += ':' + options.name;
+	      }
+	
+	      warn('Attribute' + (plural ? 's ' : ' ') + names.join(', ') + (plural ? ' are' : ' is') + ' ignored on component ' + '<' + componentName + '> because ' + 'the component is a fragment instance: ' + 'http://vuejs.org/guide/components.html#Fragment-Instance');
 	    }
 	  }
 	
@@ -7580,6 +7737,10 @@
 	  // textarea treats its text content as the initial value.
 	  // just bind it as an attr directive for value.
 	  if (el.tagName === 'TEXTAREA') {
+	    // a textarea which has v-pre attr should skip complie.
+	    if (getAttr(el, 'v-pre') !== null) {
+	      return skip;
+	    }
 	    var tokens = parseText(el.value);
 	    if (tokens) {
 	      el.setAttribute(':value', tokensToExp(tokens));
@@ -7906,7 +8067,7 @@
 	    modifiers: modifiers,
 	    def: def
 	  };
-	  // check ref for v-for and router-view
+	  // check ref for v-for, v-if and router-view
 	  if (dirName === 'for' || dirName === 'router-view') {
 	    descriptor.ref = findRef(el);
 	  }
@@ -8146,6 +8307,9 @@
 	  var frag = parseTemplate(template, true);
 	  if (frag) {
 	    var replacer = frag.firstChild;
+	    if (!replacer) {
+	      return frag;
+	    }
 	    var tag = replacer.tagName && replacer.tagName.toLowerCase();
 	    if (options.replace) {
 	      /* istanbul ignore if */
@@ -8898,7 +9062,7 @@
 	Directive.prototype._checkStatement = function () {
 	  var expression = this.expression;
 	  if (expression && this.acceptStatement && !isSimplePath(expression)) {
-	    var fn = parseExpression(expression).get;
+	    var fn = parseExpression$1(expression).get;
 	    var scope = this._scope || this.vm;
 	    var handler = function handler(e) {
 	      scope.$event = e;
@@ -9346,7 +9510,7 @@
 	   */
 	
 	  Vue.prototype.$get = function (exp, asStatement) {
-	    var res = parseExpression(exp);
+	    var res = parseExpression$1(exp);
 	    if (res) {
 	      if (asStatement) {
 	        var self = this;
@@ -9374,7 +9538,7 @@
 	   */
 	
 	  Vue.prototype.$set = function (exp, val) {
-	    var res = parseExpression(exp, true);
+	    var res = parseExpression$1(exp, true);
 	    if (res && res.set) {
 	      res.set.call(this, this, val);
 	    }
@@ -10137,7 +10301,7 @@
 	}
 	
 	/**
-	 * Filter filter for arrays
+	 * Order filter for arrays
 	 *
 	 * @param {String|Array<String>|Function} ...sortKeys
 	 * @param {Number} [order]
@@ -10520,7 +10684,7 @@
 	
 	installGlobalAPI(Vue);
 	
-	Vue.version = '1.0.26';
+	Vue.version = '1.0.28';
 	
 	// devtools global hook
 	/* istanbul ignore next */
@@ -10535,7 +10699,7 @@
 	}, 0);
 	
 	module.exports = Vue;
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(8)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
 /* 8 */
@@ -10728,6 +10892,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
 	__webpack_require__(10)
 	__vue_script__ = __webpack_require__(13)
 	if (__vue_script__ &&
@@ -10737,14 +10902,20 @@
 	__vue_template__ = __webpack_require__(19)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
 	if (__vue_template__) {
-	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	__vue_options__.template = __vue_template__
 	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "./app.vue"
+	  var id = "_v-22f22513/app.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -10768,8 +10939,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../node_modules/.npminstall/css-loader/0.23.1/css-loader/index.js?sourceMap!./../node_modules/.npminstall/vue-loader/8.5.2/vue-loader/lib/style-rewriter.js!./../node_modules/.npminstall/vue-loader/8.5.2/vue-loader/lib/selector.js?type=style&index=0!./app.vue", function() {
-				var newContent = require("!!./../node_modules/.npminstall/css-loader/0.23.1/css-loader/index.js?sourceMap!./../node_modules/.npminstall/vue-loader/8.5.2/vue-loader/lib/style-rewriter.js!./../node_modules/.npminstall/vue-loader/8.5.2/vue-loader/lib/selector.js?type=style&index=0!./app.vue");
+			module.hot.accept("!!./../node_modules/.0.23.1@css-loader/index.js?sourceMap!./../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./app.vue", function() {
+				var newContent = require("!!./../node_modules/.0.23.1@css-loader/index.js?sourceMap!./../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./../node_modules/.8.5.4@vue-loader/lib/selector.js?type=style&index=0!./app.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -10787,7 +10958,7 @@
 	
 	
 	// module
-	exports.push([module.id, "\n.container {\n\twidth: 300px;\n\tmargin: 50px auto;\n\tposition: relative;\n}\n.date-editor {\n\tpadding: 5px 10px;\n\tcursor: pointer;\n\tborder-radius: 2px;\n\tborder: 1px solid #CCC;\n}\n.date-editor:focus {\n\tborder-color: #20A0FF;\n}\n", "", {"version":3,"sources":["/./src/app.vue?18a03b81"],"names":[],"mappings":";AACA;CACA,aAAA;CACA,kBAAA;CACA,mBAAA;CACA;AACA;CACA,kBAAA;CACA,gBAAA;CACA,mBAAA;CACA,uBAAA;CACA;AACA;CACA,sBAAA;CACA","file":"app.vue","sourcesContent":["<style>\r\n\t.container {\r\n\t\twidth: 300px;\r\n\t\tmargin: 50px auto;\r\n\t\tposition: relative;\r\n\t}\r\n\t.date-editor {\r\n\t\tpadding: 5px 10px;\r\n\t\tcursor: pointer;\r\n\t\tborder-radius: 2px;\r\n\t\tborder: 1px solid #CCC;\r\n\t}\r\n\t.date-editor:focus {\r\n\t\tborder-color: #20A0FF;\r\n\t}\r\n</style>\r\n\r\n<template>\r\n\t<div class=\"container\">\r\n\t\t<input type=\"text\" class=\"date-editor\" placeholder=\"选择日期\" readonly v-model=\"dateValue\" @focus=\"focus\">\r\n\t\t<calendar :show-date-picker.sync=\"showDatePicker\" :time.sync=\"time\" :date-value.sync=\"dateValue\" v-if=\"showDatePicker\" transition=\"calendar\"></calendar>\r\n\t</div>\r\n</template>\r\n\r\n<script>\r\n\timport calendar from \"../src/components/calendar.vue\"\r\n\r\n\texport default {\r\n\t\tdata() {\r\n\t\t\treturn {\r\n\t\t\t\tshowDatePicker: false,\r\n\t\t\t\tdateValue: \"\",\r\n\t\t\t\ttime: 0\r\n\t\t\t}\r\n\t\t},\r\n\t\tcomponents: {\r\n\t\t\tcalendar\r\n\t\t},\r\n\t\tmethods: {\r\n\t\t\tfocus() {\r\n\t\t\t\tthis.showDatePicker = true\r\n\t\t\t},\r\n\t\t\tblur() {\r\n\t\t\t\t//this.showDatePicker = false\r\n\t\t\t},\r\n\t\t\tcreateDateText() {\r\n\t\t\t\tlet date = new Date()\r\n\t\t\t\tlet year = date.getFullYear()\r\n\t\t\t\tlet month = date.getMonth() + 1\r\n\t\t\t\tlet day = date.getDate()\r\n\r\n\t\t\t\tlet str = `${year}/${month}/${day}`\r\n\r\n\t\t\t\tthis.dateText = str.replace(/\\b(\\w)\\b/g, \"0$1\")\r\n\t\t\t}\r\n\t\t},\r\n\t\tready() {\r\n\t\t\t//this.createDateText()\r\n\t\t}\r\n\t}\r\n</script>"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, "\n.container {\n\twidth: 300px;\n\tmargin: 50px auto;\n\tposition: relative;\n}\n.date-editor {\n\tpadding: 5px 10px;\n\tcursor: pointer;\n\tborder-radius: 2px;\n\tborder: 1px solid #CCC;\n}\n.date-editor:focus {\n\tborder-color: #20A0FF;\n}\n", "", {"version":3,"sources":["/./src/app.vue?2bd4d370"],"names":[],"mappings":";AACA;CACA,aAAA;CACA,kBAAA;CACA,mBAAA;CACA;AACA;CACA,kBAAA;CACA,gBAAA;CACA,mBAAA;CACA,uBAAA;CACA;AACA;CACA,sBAAA;CACA","file":"app.vue","sourcesContent":["<style>\r\n\t.container {\r\n\t\twidth: 300px;\r\n\t\tmargin: 50px auto;\r\n\t\tposition: relative;\r\n\t}\r\n\t.date-editor {\r\n\t\tpadding: 5px 10px;\r\n\t\tcursor: pointer;\r\n\t\tborder-radius: 2px;\r\n\t\tborder: 1px solid #CCC;\r\n\t}\r\n\t.date-editor:focus {\r\n\t\tborder-color: #20A0FF;\r\n\t}\r\n</style>\r\n\r\n<template>\r\n\t<div class=\"container\">\r\n\t\t<input type=\"text\" class=\"date-editor\" placeholder=\"选择日期\" readonly v-model=\"dateValue\" @focus=\"focus\" @blur=\"blur\">\r\n\t\t<calendar :show-date-picker.sync=\"showDatePicker\" :time.sync=\"time\" :date-value.sync=\"dateValue\" v-if=\"showDatePicker\" transition=\"calendar\"></calendar>\r\n\t</div>\r\n</template>\r\n\r\n<script>\r\n\timport calendar from \"../src/components/calendar.vue\"\r\n\r\n\texport default {\r\n\t\tdata() {\r\n\t\t\treturn {\r\n\t\t\t\tshowDatePicker: false,\r\n\t\t\t\tdateValue: \"\",\r\n\t\t\t\ttime: 0,\r\n\t\t\t\tstatus: false\r\n\t\t\t}\r\n\t\t},\r\n\t\tcomponents: {\r\n\t\t\tcalendar\r\n\t\t},\r\n\t\tmethods: {\r\n\t\t\tfocus() {\r\n\t\t\t\tthis.showDatePicker = true\r\n\t\t\t},\r\n\t\t\tblur() {\r\n\t\t\t\tif (this.status) {\r\n\t\t\t\t\treturn\r\n\t\t\t\t}\r\n\r\n\t\t\t\tthis.showDatePicker = false\r\n\t\t\t},\r\n\t\t},\r\n\t\tevents: {\r\n\t\t\tchange(value) {\r\n\t\t\t\tthis.status = value\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n</script>"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 
@@ -11035,7 +11206,8 @@
 			return {
 				showDatePicker: false,
 				dateValue: "",
-				time: 0
+				time: 0,
+				status: false
 			};
 		},
 	
@@ -11046,19 +11218,19 @@
 			focus: function focus() {
 				this.showDatePicker = true;
 			},
-			blur: function blur() {},
-			createDateText: function createDateText() {
-				var date = new Date();
-				var year = date.getFullYear();
-				var month = date.getMonth() + 1;
-				var day = date.getDate();
+			blur: function blur() {
+				if (this.status) {
+					return;
+				}
 	
-				var str = year + "/" + month + "/" + day;
-	
-				this.dateText = str.replace(/\b(\w)\b/g, "0$1");
+				this.showDatePicker = false;
 			}
 		},
-		ready: function ready() {}
+		events: {
+			change: function change(value) {
+				this.status = value;
+			}
+		}
 	};
 
 /***/ },
@@ -11066,6 +11238,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
 	__webpack_require__(15)
 	__vue_script__ = __webpack_require__(17)
 	if (__vue_script__ &&
@@ -11075,14 +11248,20 @@
 	__vue_template__ = __webpack_require__(18)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
 	if (__vue_template__) {
-	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	__vue_options__.template = __vue_template__
 	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "./calendar.vue"
+	  var id = "_v-34f63a94/calendar.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -11106,8 +11285,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/.npminstall/css-loader/0.23.1/css-loader/index.js?sourceMap!./../../node_modules/.npminstall/vue-loader/8.5.2/vue-loader/lib/style-rewriter.js!./calendar.css", function() {
-				var newContent = require("!!./../../node_modules/.npminstall/css-loader/0.23.1/css-loader/index.js?sourceMap!./../../node_modules/.npminstall/vue-loader/8.5.2/vue-loader/lib/style-rewriter.js!./calendar.css");
+			module.hot.accept("!!./../../node_modules/.0.23.1@css-loader/index.js?sourceMap!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./calendar.css", function() {
+				var newContent = require("!!./../../node_modules/.0.23.1@css-loader/index.js?sourceMap!./../../node_modules/.8.5.4@vue-loader/lib/style-rewriter.js!./calendar.css");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -11178,6 +11357,16 @@
 		computed: {
 			date: function date() {
 				return this.dateValue ? new Date(this.time) : new Date();
+			},
+			isSelected: function isSelected() {
+				if (this.dateValue) {
+					return this.year === +this.dateValue.substr(0, 4) && this.month === +this.dateValue.substr(5, 2);
+				} else {
+					return this.isToday;
+				}
+			},
+			isToday: function isToday() {
+				return this.year === this.currentYear && this.month === this.currentMonth;
 			}
 		},
 		methods: {
@@ -11319,6 +11508,12 @@
 				this.time = date.getTime();
 	
 				this.showDatePicker = false;
+			},
+			mouseenter: function mouseenter() {
+				this.$dispatch("change", true);
+			},
+			mouseleave: function mouseleave() {
+				this.$dispatch("change", false);
 			}
 		},
 		ready: function ready() {
@@ -11345,7 +11540,7 @@
 			i = 0;
 	
 			while (i++ < 12) {
-				this.monthList.push(i + "月");
+				this.monthList.push(i + "\u6708");
 			}
 		}
 	};
@@ -11354,13 +11549,13 @@
 /* 18 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\n\n<div class=\"calendar-panel\" >\n\t<div class=\"calendar-panel-header\">\n\t\t<div class=\"year\" @click=\"selectYear\">{{year}}年{{month}}月</div>\n\t\t<div class=\"prev-arrow\" @click=\"prevMonth\" v-if=\"stage === 0\"></div>\n\t\t<div  class=\"next-arrow\" @click=\"nextMonth\" v-if=\"stage === 0\"></div>\n\t</div>\n\t<div class=\"calendar-panel-content\" v-if=\"stage === 0\">\n\t\t<div class=\"calendar-header\">\n\t\t\t<span v-for=\"item of weeks\" v-text=\"item\"></span>\n\t\t</div>\n\t\t<div class=\"calendar-content\">\n\t\t\t<template track-by=\"$index\" v-for=\"item of dates\">\n\t\t\t\t<a href=\"javascript:;\" class=\"prev-month\" v-if=\"$index < firstDay - 1\"  v-text=\"item\"></a>\n\n\t\t\t\t<a href=\"javascript:;\" class=\"available\" :class=\"{selected: year === + dateValue.substr(0, 4) && month === + dateValue.substr(5, 2) && item === today && $index > firstDay - 2 && $index < lastDay + firstDay - 1, today: year === currentYear && month === currentMonth && item === currentDay && $index > firstDay - 2 && $index < lastDay + firstDay - 1}\" v-if=\"$index > firstDay - 2 && $index < lastDay + firstDay - 1\" v-text=\"(year === currentYear && month === currentMonth && item === currentDay && $index > firstDay - 2 && $index < lastDay + firstDay - 1) ? '今天' : item\" @click=\"selectDate(item)\"></a>\n\n\t\t\t\t<a href=\"javascript:;\" class=\"next-month\" v-if=\"$index > lastDay + firstDay - 2\" v-text=\"item\"></a>\n\t\t\t</template>\n\t\t</div>\n\t</div>\n\t<div class=\"calendar-year\" v-if=\"stage === 1\">\n\t\t<!-- <div class=\"year-shadow-before\"></div> -->\n\t\t<ul>\n\t\t\t<li v-for=\"item of yearList\" v-text=\"item\" @click=\"selectMonth(item)\"></li>\n\t\t</ul>\n\t\t<!-- <div class=\"year-shadow-after\"></div> -->\n\t</div>\n\t<div class=\"calendar-month\" v-if=\"stage === 2\">\n\t\t<ul>\n\t\t\t<li v-for=\"item of monthList\" v-text=\"item\" @click=\"render(item)\"></li>\n\t\t</ul>\n\t</div>\n</div>\n";
+	module.exports = "\n\n\n<div class=\"calendar-panel\" @mouseenter=\"mouseenter\" @mouseleave=\"mouseleave\">\n\t<div class=\"calendar-panel-header\">\n\t\t<div class=\"year\" @click=\"selectYear\">{{year}}年{{month}}月</div>\n\t\t<div class=\"prev-arrow\" @click=\"prevMonth\" v-if=\"stage === 0\"></div>\n\t\t<div  class=\"next-arrow\" @click=\"nextMonth\" v-if=\"stage === 0\"></div>\n\t</div>\n\t<div class=\"calendar-panel-content\" v-if=\"stage === 0\">\n\t\t<div class=\"calendar-header\">\n\t\t\t<span v-for=\"item of weeks\" v-text=\"item\"></span>\n\t\t</div>\n\t\t<div class=\"calendar-content\">\n\t\t\t<template track-by=\"$index\" v-for=\"item of dates\">\n\t\t\t\t<a href=\"javascript:;\" class=\"prev-month\" v-if=\"$index < firstDay - 1\"  v-text=\"item\"></a>\n\n\t\t\t\t<a href=\"javascript:;\" class=\"available\" :class=\"{selected: isSelected && item === today && $index > firstDay - 2 && $index < lastDay + firstDay - 1, today: isToday && item === currentDay && $index > firstDay - 2 && $index < lastDay + firstDay - 1}\" v-if=\"$index > firstDay - 2 && $index < lastDay + firstDay - 1\" v-text=\"(isToday && item === currentDay && $index > firstDay - 2 && $index < lastDay + firstDay - 1) ? '今天' : item\" @click=\"selectDate(item)\"></a>\n\n\t\t\t\t<a href=\"javascript:;\" class=\"next-month\" v-if=\"$index > lastDay + firstDay - 2\" v-text=\"item\"></a>\n\t\t\t</template>\n\t\t</div>\n\t</div>\n\t<div class=\"calendar-year\" v-if=\"stage === 1\">\n\t\t<!-- <div class=\"year-shadow-before\"></div> -->\n\t\t<ul>\n\t\t\t<li v-for=\"item of yearList\" v-text=\"item\" @click=\"selectMonth(item)\"></li>\n\t\t</ul>\n\t\t<!-- <div class=\"year-shadow-after\"></div> -->\n\t</div>\n\t<div class=\"calendar-month\" v-if=\"stage === 2\">\n\t\t<ul>\n\t\t\t<li v-for=\"item of monthList\" v-text=\"item\" @click=\"render(item)\"></li>\n\t\t</ul>\n\t</div>\n</div>\n";
 
 /***/ },
 /* 19 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<div class=\"container\">\n\t<input type=\"text\" class=\"date-editor\" placeholder=\"选择日期\" readonly v-model=\"dateValue\" @focus=\"focus\">\n\t<calendar :show-date-picker.sync=\"showDatePicker\" :time.sync=\"time\" :date-value.sync=\"dateValue\" v-if=\"showDatePicker\" transition=\"calendar\"></calendar>\n</div>\n";
+	module.exports = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<div class=\"container\">\n\t<input type=\"text\" class=\"date-editor\" placeholder=\"选择日期\" readonly v-model=\"dateValue\" @focus=\"focus\" @blur=\"blur\">\n\t<calendar :show-date-picker.sync=\"showDatePicker\" :time.sync=\"time\" :date-value.sync=\"dateValue\" v-if=\"showDatePicker\" transition=\"calendar\"></calendar>\n</div>\n";
 
 /***/ }
 /******/ ]);
