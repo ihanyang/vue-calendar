@@ -17,7 +17,7 @@
 
 <template>
 	<div class="container">
-		<input type="text" class="date-editor" placeholder="选择日期" readonly v-model="dateValue" @focus="focus">
+		<input type="text" class="date-editor" placeholder="选择日期" readonly v-model="dateValue" @focus="focus" @blur="blur">
 		<calendar :show-date-picker.sync="showDatePicker" :time.sync="time" :date-value.sync="dateValue" v-if="showDatePicker" transition="calendar"></calendar>
 	</div>
 </template>
@@ -30,7 +30,8 @@
 			return {
 				showDatePicker: false,
 				dateValue: "",
-				time: 0
+				time: 0,
+				status: false
 			}
 		},
 		components: {
@@ -41,21 +42,17 @@
 				this.showDatePicker = true
 			},
 			blur() {
-				//this.showDatePicker = false
+				if (this.status) {
+					return
+				}
+
+				this.showDatePicker = false
 			},
-			createDateText() {
-				let date = new Date()
-				let year = date.getFullYear()
-				let month = date.getMonth() + 1
-				let day = date.getDate()
-
-				let str = `${year}/${month}/${day}`
-
-				this.dateText = str.replace(/\b(\w)\b/g, "0$1")
-			}
 		},
-		ready() {
-			//this.createDateText()
+		events: {
+			change(value) {
+				this.status = value
+			}
 		}
 	}
 </script>

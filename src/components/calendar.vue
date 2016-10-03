@@ -1,7 +1,7 @@
 <style src="../css/calendar.css"></style>
 
 <template>
-	<div class="calendar-panel" >
+	<div class="calendar-panel" @mouseenter="mouseenter" @mouseleave="mouseleave">
 		<div class="calendar-panel-header">
 			<div class="year" @click="selectYear">{{year}}年{{month}}月</div>
 			<div class="prev-arrow" @click="prevMonth" v-if="stage === 0"></div>
@@ -15,7 +15,7 @@
 				<template track-by="$index" v-for="item of dates">
 					<a href="javascript:;" class="prev-month" v-if="$index < firstDay - 1"  v-text="item"></a>
 
-					<a href="javascript:;" class="available" :class="{selected: year === + dateValue.substr(0, 4) && month === + dateValue.substr(5, 2) && item === today && $index > firstDay - 2 && $index < lastDay + firstDay - 1, today: year === currentYear && month === currentMonth && item === currentDay && $index > firstDay - 2 && $index < lastDay + firstDay - 1}" v-if="$index > firstDay - 2 && $index < lastDay + firstDay - 1" v-text="(year === currentYear && month === currentMonth && item === currentDay && $index > firstDay - 2 && $index < lastDay + firstDay - 1) ? '今天' : item" @click="selectDate(item)"></a>
+					<a href="javascript:;" class="available" :class="{selected: isSelected && item === today && $index > firstDay - 2 && $index < lastDay + firstDay - 1, today: isToday && item === currentDay && $index > firstDay - 2 && $index < lastDay + firstDay - 1}" v-if="$index > firstDay - 2 && $index < lastDay + firstDay - 1" v-text="(isToday && item === currentDay && $index > firstDay - 2 && $index < lastDay + firstDay - 1) ? '今天' : item" @click="selectDate(item)"></a>
 
 					<a href="javascript:;" class="next-month" v-if="$index > lastDay + firstDay - 2" v-text="item"></a>
 				</template>
@@ -75,6 +75,17 @@
 		computed: {
 			date() {
 				return this.dateValue ? new Date(this.time) : new Date()
+			},
+			isSelected() {
+				if (this.dateValue) {
+					return this.year === + this.dateValue.substr(0, 4) && this.month === + this.dateValue.substr(5, 2)
+				} else {
+					return this.isToday
+				}
+
+			},
+			isToday() {
+				return this.year === this.currentYear && this.month === this.currentMonth
 			}
 		},
 		methods: {
@@ -220,6 +231,12 @@
 				this.time = date.getTime()
 
 				this.showDatePicker = false
+			},
+			mouseenter() {
+				this.$dispatch("change", true)
+			},
+			mouseleave() {
+				this.$dispatch("change", false)
 			}
 		},
 		ready() {
