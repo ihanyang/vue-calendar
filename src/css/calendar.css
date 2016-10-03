@@ -96,6 +96,7 @@
 	color: #A5A5A5;
 
 	& span {
+		display: block;
 		width: 45px;
 		line-height: 36px;
 		text-align: center;
@@ -109,6 +110,7 @@
 	align-items: center;
 
 	& a {
+		display: block;
 		width: 44px;
 		/* height: 36px; */
 		/* margin-right: 2px; */
