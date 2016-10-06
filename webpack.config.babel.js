@@ -1,5 +1,6 @@
 import path from "path"
 import precss from "precss"
+import webpack from "webpack"
 import autoprefixer from "autoprefixer"
 
 module.exports = {
@@ -32,5 +33,6 @@ module.exports = {
 	vue: {
 		postcss: [precss]
 	},
+	plugins: [new webpack.optimize.CommonsChunkPlugin("common.js", ["app", "vendors"])],
 	devtool: "source-map"
 }

@@ -11,11 +11,11 @@
 			<div class="calendar-header">
 				<span v-for="item of weeks" v-text="item"></span>
 			</div>
-			<div class="calendar-content">
+			<div class="calendar-content" @click="selectDate">
 				<template track-by="$index" v-for="item of dates">
 					<a href="javascript:;" class="prev-month" v-if="$index < firstDay - 1"  v-text="item"></a>
 
-					<a href="javascript:;" class="available" :class="{selected: isSelected && item === today && $index > firstDay - 2 && $index < lastDay + firstDay - 1, today: isToday && item === currentDay && $index > firstDay - 2 && $index < lastDay + firstDay - 1}" v-if="$index > firstDay - 2 && $index < lastDay + firstDay - 1" v-text="(isToday && item === currentDay && $index > firstDay - 2 && $index < lastDay + firstDay - 1) ? '今天' : item" @click="selectDate(item)"></a>
+					<a href="javascript:;" class="available" :class="{selected: isSelected && item === today && $index > firstDay - 2 && $index < lastDay + firstDay - 1, today: isToday && item === currentDay && $index > firstDay - 2 && $index < lastDay + firstDay - 1}" v-if="$index > firstDay - 2 && $index < lastDay + firstDay - 1" v-text="(isToday && item === currentDay && $index > firstDay - 2 && $index < lastDay + firstDay - 1) ? '今天' : item" :data-index="item"></a>
 
 					<a href="javascript:;" class="next-month" v-if="$index > lastDay + firstDay - 2" v-text="item"></a>
 				</template>
@@ -223,8 +223,14 @@
 
 				this.getCal()
 			},
-			selectDate(value) {
-				const date = new Date(this.date.getFullYear(), this.date.getMonth(), value)
+			selectDate(e) {
+				const day = e.target.dataset.index
+
+				if (! day) {
+					return
+				}
+
+				const date = new Date(this.date.getFullYear(), this.date.getMonth(), day)
 
 				this.dateValue = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`.replace(/\b(\w)\b/g, "0$1")
 
